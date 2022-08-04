@@ -9,24 +9,14 @@
     "background": {
         "service_worker": "background.js"
     },
-    "permissions": [
-        "storage",
-        "activeTab",
-        "scripting"
-    ],
+    "permissions": ["storage", "activeTab", "scripting"],
     "action": {
         "default_title": "Vue Popup",
         "default_icon": "assets/favicon.ico"
     },
-    "content_scripts": [
-        {
-            "matches": [
-                "*://live.douyin.com/*"
-            ],
-            "js": [
-                "content-scripts/live-douyin.js"
-            ],
-            "css":["assets/live-douyin.de7793b4.css"]
-        }
-    ]
+    "content_scripts": [{
+        "matches": ["*://live.douyin.com/*"],
+        "js": ["content-scripts/live-douyin.js"],
+        "css": ["assets/live-douyin.050f6096.css"]
+    }]
 }
