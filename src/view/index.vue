@@ -31,9 +31,11 @@ const dialogOptions = reactive({
 .el-slider__button {
   background-color: #161722;
 }
-.el-slider__runway,
-.el-slider__stop {
+.el-slider__runway {
   background-color: #6c6c6c;
+}
+.el-slider__stop {
+  background-color: #848484;
 }
 .el-form-item__label,
 .el-slider__marks-text,
@@ -44,7 +46,7 @@ const dialogOptions = reactive({
 .el-slider__marks-text {
   margin-top: 8px;
 }
-.el-slider__marks-text:nth-child(2) {
+.el-slider__marks-text:last-child {
   left: initial !important;
   right: 0;
   transform: translateX(50%);
