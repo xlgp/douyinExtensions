@@ -1,6 +1,8 @@
 <template>
   <el-config-provider :z-index="zIndex">
-    <el-button type="danger" @click="dialogVisible = true">改样式</el-button>
+    <div @click="dialogVisible = true" class="dy-ext-btn">
+      <ccs3 />
+    </div>
     <el-dialog
       class="dy-dialog"
       v-model="dialogVisible"
