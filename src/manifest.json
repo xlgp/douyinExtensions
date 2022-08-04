@@ -1,0 +1,21 @@
+{
+    "name": "抖音插件",
+    "description": "抖音样式插件",
+    "version": "0.0.0",
+    "manifest_version": 3,
+    "icons": {
+        "128": "assets/favicon.ico"
+    },
+    "background": {
+        "service_worker": "background.ts"
+    },
+    "permissions": ["storage", "activeTab", "scripting"],
+    "action": {
+        "default_title": "Vue Popup",
+        "default_icon": "assets/favicon.ico"
+    },
+    "content_scripts": [{
+        "matches": ["*://live.douyin.com/*"],
+        "js": ["content-scripts/live-douyin.ts"]
+    }]
+}
