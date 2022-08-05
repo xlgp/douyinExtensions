@@ -39,18 +39,25 @@
   </el-form>
 </template>
 <script lang="ts" setup>
-
-import useOptions from './composable/useOptions';
+import useOptions from "./composable/useOptions";
 
 const video: HTMLVideoElement = (inject("video") as unknown) as HTMLVideoElement;
 
-const { transformText, translateOptions, translateXSliderOptions, translateYSliderOptions, scaleSliderOptions, rotateSliderOptions, form } = useOptions;
+const {
+  transformText,
+  translateOptions,
+  translateXSliderOptions,
+  translateYSliderOptions,
+  scaleSliderOptions,
+  rotateSliderOptions,
+  form,
+} = useOptions;
 
 watch(transformText, (transformText) => {
   video.style.transform = transformText;
 });
 </script>
-<style scope>
+<style scoped>
 .el-form-item {
   margin-bottom: 26px;
 }
