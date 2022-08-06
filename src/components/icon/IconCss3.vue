@@ -20,7 +20,7 @@
 </template>
 <script setup lang="ts">
 </script>
-<style scope>
+<style scoped>
 svg {
   fill: currentColor;
   margin: 8px 0px 0px 8px;
