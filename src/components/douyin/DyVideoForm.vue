@@ -58,7 +58,30 @@ watch(transformText, (transformText) => {
 });
 </script>
 <style scoped>
-.el-form-item {
+:deep(.el-form-item) {
   margin-bottom: 26px;
+}
+
+:deep(.el-slider__button) {
+  background-color: #161722;
+}
+:deep(.el-slider__runway) {
+  background-color: #6c6c6c;
+}
+:deep(.el-slider__stop) {
+  background-color: #848484;
+}
+:deep(.el-form-item__label) {
+  color: #e5e5e5;
+}
+
+:deep(.el-slider__marks-text) {
+  margin-top: 8px;
+  color: #e5e5e5;
+}
+:deep(.el-slider__marks-text:last-child) {
+  left: initial !important;
+  right: 0;
+  transform: translateX(50%);
 }
 </style>

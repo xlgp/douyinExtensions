@@ -6,9 +6,6 @@
     "icons": {
         "128": "assets/favicon.ico"
     },
-    "background": {
-        "service_worker": "background.ts"
-    },
     "permissions": ["storage", "activeTab", "scripting"],
     "action": {
         "default_title": "Vue Popup",

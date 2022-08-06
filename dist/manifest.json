@@ -6,9 +6,6 @@
     "icons": {
         "128": "assets/favicon.ico"
     },
-    "background": {
-        "service_worker": "background.js"
-    },
     "permissions": ["storage", "activeTab", "scripting"],
     "action": {
         "default_title": "Vue Popup",
@@ -17,6 +14,6 @@
     "content_scripts": [{
         "matches": ["*://live.douyin.com/*"],
         "js": ["content-scripts/live-douyin.js"],
-        "css": ["assets/live-douyin.050f6096.css"]
+        "css": ["assets/live-douyin.dae817fe.css"]
     }]
 }

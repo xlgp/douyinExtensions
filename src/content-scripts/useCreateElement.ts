@@ -20,9 +20,9 @@ function createElement() {
   mountEl.setAttribute("id", MOUNT_EL_ID);
   let style: Style = {
     position: "fixed",
-    top: "200px",
+    bottom: "90px",
     right: "8px",
-    "z-index": "1024",
+    "z-index": "10240",
   };
   mountEl.style["position"] = style["position"];
 
