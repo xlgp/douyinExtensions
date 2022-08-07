@@ -22,7 +22,8 @@
             ],
             "js": [
                 "content-scripts/live-douyin.js"
-            ]
+            ],
+            "css":["assets/live-douyin.a7daf514.css"]
         }
     ]
 }
