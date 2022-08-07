@@ -45,8 +45,6 @@ const video: HTMLVideoElement = (inject("video") as unknown) as HTMLVideoElement
 
 const {
   transformText,
-  translateXSliderOptions,
-  translateYSliderOptions,
   translateSliderOptions,
   scaleSliderOptions,
   rotateSliderOptions,
