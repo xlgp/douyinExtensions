@@ -21,19 +21,19 @@
     <el-form-item label="移动（左右）">
       <el-slider
         v-model="form.translateX"
-        :min="translateXSliderOptions.min"
-        :max="translateXSliderOptions.max"
-        :step="translateXSliderOptions.step"
-        :marks="translateXSliderOptions.marks"
+        :min="translateSliderOptions.X.min"
+        :max="translateSliderOptions.X.max"
+        :step="translateSliderOptions.X.step"
+        :marks="translateSliderOptions.X.marks"
       />
     </el-form-item>
     <el-form-item label="移动（上下）">
       <el-slider
         v-model="form.translateY"
-        :min="translateYSliderOptions.min"
-        :max="translateYSliderOptions.max"
-        :step="translateYSliderOptions.step"
-        :marks="translateYSliderOptions.marks"
+        :min="translateSliderOptions.Y.min"
+        :max="translateSliderOptions.Y.max"
+        :step="translateSliderOptions.Y.step"
+        :marks="translateSliderOptions.Y.marks"
       />
     </el-form-item>
   </el-form>
@@ -45,17 +45,13 @@ const video: HTMLVideoElement = (inject("video") as unknown) as HTMLVideoElement
 
 const {
   transformText,
-  translateOptions,
   translateXSliderOptions,
   translateYSliderOptions,
+  translateSliderOptions,
   scaleSliderOptions,
   rotateSliderOptions,
   form,
-} = useOptions;
-
-watch(transformText, (transformText) => {
-  video.style.transform = transformText;
-});
+} = useOptions(video);
 </script>
 <style scoped>
 :deep(.el-form-item) {
