@@ -10,7 +10,6 @@ declare module '@vue/runtime-core' {
     DyVideoCssDialog: typeof import('./src/components/douyin/DyVideoCssDialog.vue')['default']
     DyVideoForm: typeof import('./src/components/douyin/DyVideoForm.vue')['default']
     DyVideoHeader: typeof import('./src/components/douyin/DyVideoHeader.vue')['default']
-    ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
