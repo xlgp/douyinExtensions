@@ -1,6 +1,9 @@
-export default (video: HTMLVideoElement) => {
+import { Ref } from "vue";
+
+export default (video: HTMLVideoElement, transformDisabled: Ref<boolean>) => {
 
   let clientRect = video.getBoundingClientRect();
+  let videoStyleTransform = video.style.transform;
 
   const form = reactive({
     scale: 1,
@@ -47,7 +50,7 @@ export default (video: HTMLVideoElement) => {
       max: height,
       step: 1,
       marks: { ["-" + height]: height + "", 0: "0", [form.translateY]: form.translateY + "", [height]: height + "" }
-    }; console.log(X, Y);
+    };
     return { X, Y };
   });
 
@@ -59,8 +62,17 @@ export default (video: HTMLVideoElement) => {
     ].join(" ");
   });
 
-  watch(transformText, (transformText) => {
+  const changeVideoStyleTransform = (transformText: string) => {
     video.style.transform = transformText;
+  }
+
+  watch(transformText, changeVideoStyleTransform);
+  watch(transformDisabled, (disabled) => {
+    let text = videoStyleTransform;
+    if (disabled == false) {
+      text = transformText.value;
+    }
+    changeVideoStyleTransform(text)
   });
 
   return {
@@ -68,6 +80,6 @@ export default (video: HTMLVideoElement) => {
     translateSliderOptions,
     form,
     rotateSliderOptions,
-    scaleSliderOptions,
+    scaleSliderOptions
   }
 }

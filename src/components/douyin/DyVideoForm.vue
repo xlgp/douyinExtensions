@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="form" label-width="100px">
+  <el-form :model="form" label-width="100px" :disabled="disabled">
     <el-form-item label="缩放">
       <el-slider
         v-model="form.scale"
@@ -41,21 +41,27 @@
 <script lang="ts" setup>
 import useOptions from "./composable/useOptions";
 
+const props = defineProps({
+  disabled: {
+    type: Boolean,
+    required: true,
+  },
+});
+
 const video: HTMLVideoElement = (inject("video") as unknown) as HTMLVideoElement;
+const { disabled } = toRefs(props);
 
 const {
-  transformText,
   translateSliderOptions,
   scaleSliderOptions,
   rotateSliderOptions,
   form,
-} = useOptions(video);
+} = useOptions(video, disabled);
 </script>
 <style scoped>
 :deep(.el-form-item) {
   margin-bottom: 26px;
 }
-
 :deep(.el-slider__button) {
   background-color: #161722;
 }

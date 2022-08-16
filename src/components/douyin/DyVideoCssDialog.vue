@@ -4,20 +4,24 @@
     <el-dialog
       class="dy-dialog"
       v-model="dialogVisible"
-      :title="dialogOptions.title"
       :modal="dialogOptions.modal"
       :close-on-click-modal="dialogOptions['close-on-click-modal']"
       :width="dialogOptions.width"
       draggable
     >
-      <dy-video-form />
+      <template #header="{ titleId, titleClass }">
+        <span :id="titleId" :class="titleClass">{{ dialogOptions.title }}</span>
+        <dy-video-header v-model="transformEnable" />
+      </template>
+      <dy-video-form :disabled="!transformEnable" />
     </el-dialog>
   </div>
 </template>
 <script setup lang="ts">
 const dialogVisible = ref(false);
+const transformEnable = ref(true);
 const dialogOptions = reactive({
-  title: "视频区样式",
+  title: "自定义视频区样式",
   modal: false,
   "close-on-click-modal": false,
   width: "500px",
