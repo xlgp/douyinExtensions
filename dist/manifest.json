@@ -1,10 +1,13 @@
 {
     "name": "抖音插件",
     "description": "抖音样式插件",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "manifest_version": 3,
     "icons": {
         "128": "assets/favicon.ico"
+    },
+    "background": {
+        "service_worker": "background.js"
     },
     "permissions": [
         "storage",
