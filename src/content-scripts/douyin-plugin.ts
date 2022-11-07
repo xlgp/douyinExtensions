@@ -1,8 +1,10 @@
 function removeOtherDom() {
 
-    //删除其他区域
-    document.getElementById('_douyin_live_scroll_container_')?.previousSibling?.remove();
-
+    //隐藏其他区域
+    let elem = document.getElementById('_douyin_live_scroll_container_')?.previousElementSibling as HTMLElement;
+    if (elem) {
+        elem.style.display = "none";
+    }
     //隐藏footer
     document.getElementsByTagName('footer')[0].style.display = 'none';
 }
@@ -13,8 +15,13 @@ function removeOtherDom() {
  */
 function renderPlayerView(liveElem: HTMLElement) {
     //删除上部分
-    liveElem.firstElementChild?.firstElementChild?.remove();
-    liveElem.firstElementChild?.lastElementChild?.remove();
+    let firstElem = liveElem.firstElementChild?.firstElementChild as HTMLElement;
+    let lastElem = liveElem.firstElementChild?.lastElementChild as HTMLElement;
+    let nextElem = liveElem.nextElementSibling as HTMLElement;
+
+    firstElem && (firstElem.style.display = "none");
+    lastElem && (lastElem.style.display = "none");
+    nextElem && (nextElem.style.display = "none");
 }
 
 /**
@@ -45,12 +52,16 @@ function addNicknameListener(callback: Function) {
             if (e.target instanceof HTMLElement) {
                 let itemDom = getChatroomItem(e.target);
                 if (itemDom) {
-                    let nickname = itemDom.children[0].children[1].innerHTML.slice(0, -1);
+                    let nickname = getNickname(itemDom.children[0].children[1]);
                     callback(nickname);
                 }
             }
         }
     )
+}
+
+function getNickname(elem: Element) {
+    return (elem as HTMLElement).innerText.slice(0, -1);
 }
 
 function getAtNickname(nickname: string) {
@@ -92,24 +103,102 @@ function renderLimit(parentElement: HTMLElement) {
     limitElem.style.zIndex = "1";
 }
 
-window.addEventListener('load', () => {
-    removeOtherDom();
+function hideLivingPlayer() {
+    let videoElem = document.getElementsByTagName("video")[0] as HTMLVideoElement;
+    videoElem.style.display = "none";
+}
+
+/**
+ * 判断是否包含用户昵称
+ * @param elem 
+ * @param nickname 
+ * @returns true or false
+ */
+function isContainAtUser(elem: Element, nickname: string) {
+    return (elem as HTMLElement).innerText.includes(nickname);
+}
+
+/**
+ * 监听 chatroom___items 子列表
+ * @param filter 过滤条件
+ * @param callback 
+ */
+function mutationObserver(filter: Function, callback: Function) {
+    const config = { childList: true, subtree: true };
+    // 当观察到变动时执行的回调函数
+    const observerCallback = function (mutationsList: MutationRecord[], observer: MutationObserver) {
+        // Use traditional 'for loops' for IE 11
+        for (let mutation of mutationsList) {
+            for (let i = 0; i < mutation.addedNodes.length; i++) {
+                const node = mutation.addedNodes[i] as HTMLElement;
+                let item = node.childNodes[0] as HTMLElement;
+                if (item.classList.contains("webcast-chatroom__room-message")) {
+                    continue;
+                }
+                if (filter(item.children[2])) {
+                    callback(item, node.dataset.id);
+                }
+            }
+        }
+    };
+
+    // 创建一个观察器实例并传入回调函数
+    const observer = new MutationObserver(observerCallback);
+
+    // 以上述配置开始观察目标节点
+    let targetNode = document.getElementsByClassName("webcast-chatroom___items")[0].firstChild;
+    if (targetNode) {
+        observer.observe(targetNode, config);
+    }
+}
+
+export interface ChatRoomItem {
+    nickname: string,
+    content: string
+}
+
+function getChatroomItem(elem: HTMLElement): ChatRoomItem {
+    let content = (elem.children[2] as HTMLElement).innerText;
+    let nickname = getNickname(elem.children[1]);
+    return {
+        nickname,
+        content
+    }
+}
+
+function getFilterNickname() {
+    return "";
+}
+
+function loadCallback() {
     try {
         //获取直播区域
         let liveElem = document.querySelector("[data-e2e='living-container']") as HTMLElement;
-        liveElem?.nextSibling?.remove();
-        renderPlayerView(liveElem);
 
+        renderPlayerView(liveElem);
         let textAreaElem = document.getElementsByClassName("webcast-chatroom___textarea")[0] as HTMLTextAreaElement;
 
         addNicknameListener((nickname: string) => {
             insertNicknameToTextAreaElem(nickname, textAreaElem);
         });
 
+        mutationObserver((elem: Element) => {
+            return isContainAtUser(elem, getFilterNickname());
+        }, (elem: HTMLElement, id: string) => {
+            console.log(getChatroomItem(elem));
+        });
+
         renderChatroomInputContainer();
     } catch (error) {
         console.error(error);
     }
+}
+
+window.addEventListener('load', () => {
+    removeOtherDom();
+    hideLivingPlayer();
+    setTimeout(loadCallback, 10);
+    document.addEventListener
 })
 
 export { }

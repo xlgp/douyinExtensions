@@ -1,0 +1,50 @@
+<template>
+  <div class="dy-ext-btn">
+    <svg
+      t="1667801052518"
+      class="icon"
+      viewBox="0 0 1024 1024"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      p-id="2654"
+      width="30"
+      height="30"
+    >
+      <path
+        d="M450.56 819.2h307.2a61.44 61.44 0 0 0 61.44-61.44V409.6h-40.96v348.16a20.48 20.48 0 0 1-20.48 20.48H450.56z"
+        p-id="2655"
+        fill="#707070"
+      ></path>
+      <path
+        d="M215.4496 816.7424a21.7088 21.7088 0 0 0 9.8304 2.4576 23.3472 23.3472 0 0 0 11.4688-3.2768L409.6 699.5968a20.48 20.48 0 0 1 12.288-3.2768h212.992a61.44 61.44 0 0 0 61.44-61.44v-368.64A61.44 61.44 0 0 0 634.88 204.8h-368.64A61.44 61.44 0 0 0 204.8 266.24v532.48a20.8896 20.8896 0 0 0 10.6496 18.0224zM245.76 557.8752V266.24a20.48 20.48 0 0 1 20.48-20.48h368.64a20.48 20.48 0 0 1 20.48 20.48v368.64a20.48 20.48 0 0 1-20.48 20.48h-212.992a63.488 63.488 0 0 0-33.9968 10.24L245.76 760.6272z"
+        p-id="2656"
+        fill="#707070"
+      ></path>
+      <path
+        d="M327.68 327.68h245.76v40.96H327.68zM327.68 450.56h163.84v40.96H327.68z"
+        p-id="2657"
+        fill="#707070"
+      ></path>
+    </svg>
+  </div>
+</template>
+<style scoped>
+svg {
+  fill: currentColor;
+  margin: 3px 0px 0px 3px;
+  color: var(--color-text-3);
+}
+.dy-ext-btn {
+  background-color: #f8f9fd;
+  background-color: var(--color-bg-1);
+  border-radius: 24px;
+  box-shadow: 0 0 24px rgb(0 0 0 / 12%);
+  box-shadow: var(--shadow-2);
+  cursor: pointer;
+  display: flex;
+  font-size: 0;
+  height: 36px;
+  margin-bottom: 8px;
+  width: 36px;
+}
+</style>

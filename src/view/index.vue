@@ -1,6 +1,6 @@
 <template>
   <el-config-provider :z-index="zIndex">
-    <dy-video-css-dialog />
+    <dy-chat-dialog />
   </el-config-provider>
 </template>
 <script setup lang="ts">

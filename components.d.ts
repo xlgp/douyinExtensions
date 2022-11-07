@@ -7,14 +7,22 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    DyVideoCssDialog: typeof import('./src/components/douyin/DyVideoCssDialog.vue')['default']
-    DyVideoForm: typeof import('./src/components/douyin/DyVideoForm.vue')['default']
-    DyVideoHeader: typeof import('./src/components/douyin/DyVideoHeader.vue')['default']
+    Douyin: typeof import('./src/components/douyin/index.vue')['default']
+    DyChatDialog: typeof import('./src/components/douyin/chat/DyChatDialog.vue')['default']
+    DyChatItem: typeof import('./src/components/douyin/chat/DyChatItem.vue')['default']
+    DyChatList: typeof import('./src/components/douyin/chat/DyChatList.vue')['default']
+    DyNicknameForm: typeof import('./src/components/douyin/chat/DyNicknameForm.vue')['default']
+    DyVideoCssDialog: typeof import('./src/components/douyin/video/DyVideoCssDialog.vue')['default']
+    DyVideoForm: typeof import('./src/components/douyin/video/DyVideoForm.vue')['default']
+    DyVideoHeader: typeof import('./src/components/douyin/video/DyVideoHeader.vue')['default']
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
+    ElInput: typeof import('element-plus/es')['ElInput']
+    ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSlider: typeof import('element-plus/es')['ElSlider']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
+    IconChat: typeof import('./src/components/icon/IconChat.vue')['default']
     IconCss3: typeof import('./src/components/icon/IconCss3.vue')['default']
   }
 }

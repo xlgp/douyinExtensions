@@ -9,6 +9,30 @@ function isValidKey(
   return key in object;
 }
 
+const zIndex = "10240";
+
+/**
+ * douyin 自己的侧边导航bar
+ */
+function getDySideBar() {
+  return document.getElementById("douyin-sidebar");
+}
+
+function setElemStyle(elem: HTMLElement) {
+  let style: Style = {
+    position: "fixed",
+    bottom: "8px",
+    right: "8px",
+    "z-index": zIndex,
+  };
+
+  Object.keys(style).forEach((key) => {
+    if (isValidKey(key, style)) {
+      elem!.style[key] = style[key];
+    }
+  });
+}
+
 function createElement() {
   const MOUNT_EL_ID = "dy-ext-box";
 
@@ -18,21 +42,16 @@ function createElement() {
   }
   mountEl = document.createElement("div");
   mountEl.setAttribute("id", MOUNT_EL_ID);
-  let style: Style = {
-    position: "fixed",
-    bottom: "90px",
-    right: "8px",
-    "z-index": "10240",
-  };
-  mountEl.style["position"] = style["position"];
 
-  Object.keys(style).forEach((key) => {
-    if (isValidKey(key, style)) {
-      mountEl!.style[key] = style[key];
-    }
-  });
+  let sidebarElem = getDySideBar();
+  if (sidebarElem) {
+    sidebarElem.style.zIndex = zIndex;
+    sidebarElem.appendChild(mountEl);
+  } else {
+    setElemStyle(mountEl);
+    document.body.appendChild(mountEl);
+  }
 
-  document.body.appendChild(mountEl);
   return mountEl;
 }
 

@@ -1,12 +1,13 @@
 {
   "name": "douyinextensions",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
+    "tsc":"tsc .\\src\\content-scripts\\douyin-plugin.ts --watch true --module esnext --outDir .\\dist\\content-scripts",
     "build:watch": "nodemon --watch src --exec npm run build --ext \"ts,vue\""
   },
   "dependencies": {
