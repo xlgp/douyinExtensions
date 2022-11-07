@@ -71,11 +71,16 @@ function isContainAtNickname(nickname: string, value: string) {
   return value.includes(getAtNickname(nickname));
 }
 
-function insertNicknameToTextAreaElem(
-  nickname: string,
-  textAreaElem: HTMLTextAreaElement
-) {
-  if (nickname && !isContainAtNickname(nickname, textAreaElem.value)) {
+function insertNicknameToTextAreaElem(nickname: string) {
+  let textAreaElem = document.getElementsByClassName(
+    "webcast-chatroom___textarea"
+  )[0] as HTMLTextAreaElement;
+
+  if (
+    nickname &&
+    textAreaElem &&
+    !isContainAtNickname(nickname, textAreaElem.value)
+  ) {
     textAreaElem.value += getAtNickname(nickname);
   }
 }
@@ -184,7 +189,10 @@ function getFilterNickname() {
   return "";
 }
 
-function loadCallback() {
+window.addEventListener("load", () => {
+  removeOtherDom();
+  // hideLivingPlayer();
+
   try {
     //获取直播区域
     let liveElem = document.querySelector(
@@ -192,34 +200,22 @@ function loadCallback() {
     ) as HTMLElement;
 
     renderPlayerView(liveElem);
-    let textAreaElem = document.getElementsByClassName(
-      "webcast-chatroom___textarea"
-    )[0] as HTMLTextAreaElement;
 
-    addNicknameListener((nickname: string) => {
-      insertNicknameToTextAreaElem(nickname, textAreaElem);
-    });
+    addNicknameListener(insertNicknameToTextAreaElem);
 
     mutationObserver(
       (elem: Element) => {
         return isContainAtUser(elem, getFilterNickname());
       },
       (elem: HTMLElement, id: string) => {
-        console.log(getChatroomItem(elem));
+        getChatroomItem(elem);
       }
     );
 
-    renderChatroomInputContainer();
+    setTimeout(renderChatroomInputContainer, 1000);
   } catch (error) {
     console.error(error);
   }
-}
-
-window.addEventListener("load", () => {
-  removeOtherDom();
-  // hideLivingPlayer();
-  setTimeout(loadCallback, 10);
-  document.addEventListener;
 });
 
 export {};
