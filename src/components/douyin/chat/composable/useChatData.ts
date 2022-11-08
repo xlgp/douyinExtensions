@@ -1,10 +1,16 @@
-import { ChatRoomItem } from "../../../../content-scripts/douyin-plugin"
+import { useChatStore } from "../store/Chat"
 
 export default () => {
 
-    const items = ref<ChatRoomItem[]>();
+    let chatStore = useChatStore();
+    let id = setInterval(() => {
+        let len = chatStore.filterChatItems.length
+        if (len > 20) {
+            clearInterval(id);
+            return;
+        }
+        chatStore.filterChatItems.push({ content: "内容......." + len, nickname: "昵称" + len });
+    }, 2000);
 
-    return {
-        items
-    }
+
 }

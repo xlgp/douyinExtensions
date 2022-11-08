@@ -8,6 +8,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Douyin: typeof import('./src/components/douyin/index.vue')['default']
+    DyChat: typeof import('./src/components/douyin/chat/DyChat.vue')['default']
     DyChatDialog: typeof import('./src/components/douyin/chat/DyChatDialog.vue')['default']
     DyChatItem: typeof import('./src/components/douyin/chat/DyChatItem.vue')['default']
     DyChatList: typeof import('./src/components/douyin/chat/DyChatList.vue')['default']
@@ -15,10 +16,14 @@ declare module '@vue/runtime-core' {
     DyVideoCssDialog: typeof import('./src/components/douyin/video/DyVideoCssDialog.vue')['default']
     DyVideoForm: typeof import('./src/components/douyin/video/DyVideoForm.vue')['default']
     DyVideoHeader: typeof import('./src/components/douyin/video/DyVideoHeader.vue')['default']
+    ElButton: typeof import('element-plus/es')['ElButton']
+    ElCard: typeof import('element-plus/es')['ElCard']
+    ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElInput: typeof import('element-plus/es')['ElInput']
+    ElPopover: typeof import('element-plus/es')['ElPopover']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSlider: typeof import('element-plus/es')['ElSlider']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']

@@ -7,19 +7,20 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "tsc":"tsc .\\src\\content-scripts\\douyin-plugin.ts --watch true --module esnext --outDir .\\dist\\content-scripts",
+    "tsc": "tsc .\\src\\content-scripts\\douyin-plugin.ts --watch true --module esnext --outDir .\\dist\\content-scripts",
     "build:watch": "nodemon --watch src --exec npm run build --ext \"ts,vue\""
   },
   "dependencies": {
     "element-plus": "^2.2.12",
+    "pinia": "^2.0.23",
     "vue": "^3.2.37"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.195",
     "@types/node": "^18.6.3",
     "@vitejs/plugin-vue": "^3.0.0",
-    "typescript": "^4.6.4",
     "nodemon": "^2.0.19",
+    "typescript": "^4.6.4",
     "unplugin-auto-import": "^0.10.3",
     "unplugin-vue-components": "^0.21.2",
     "vite": "^3.0.0",

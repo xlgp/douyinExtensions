@@ -1,13 +1,12 @@
 <template>
-  <el-form :model="form" label-width="100px">
-    <el-form-item :label="label">
-      <el-input v-model="form.nickname" />
-    </el-form-item>
-  </el-form>
+  <el-form-item :label="label">
+    <el-input v-model="filterNickname" />
+  </el-form-item>
 </template>
 <script lang="ts" setup>
+import { storeToRefs } from "pinia";
+import { useChatStore } from "./store/Chat";
 const label = "用户昵称";
-const form = reactive({
-  nickname: "",
-});
+
+const { filterNickname } = storeToRefs(useChatStore());
 </script>

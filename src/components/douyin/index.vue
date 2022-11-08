@@ -1,5 +1,7 @@
 <template>
-  <dy-video-css-dialog />
-  <dy-chat-dialog />
+  <div>
+    <dy-video-css-dialog />
+    <dy-chat />
+  </div>
 </template>
 <script setup lang="ts"></script>

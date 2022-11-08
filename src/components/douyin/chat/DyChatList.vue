@@ -4,6 +4,8 @@
   </el-scrollbar>
 </template>
 <script setup lang="ts">
-import useChatData from "./composable/useChatData";
-const { items } = useChatData();
+import { useChatStore } from "./store/Chat";
+
+const chatStore = useChatStore();
+const items = chatStore.filterChatItems;
 </script>
