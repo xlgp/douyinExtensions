@@ -16,17 +16,16 @@
     </template>
     <div style="padding: 10px">
       <dy-filter-select />
-      <dy-nickname-form />
       <dy-chat-list />
     </div>
   </el-popover>
 </template>
 <script setup lang="ts">
 import usechatOptions from "./composable/usedychatOptions";
-import useDonyinPlugin from "./composable/useDouyinPlugin";
 import { chatProvideKey, ChatProvideType } from "./constant";
-
+import useDonyinPlugin from "./composable/useDouyinPlugin";
 const { chatOptions } = usechatOptions();
+
 useDonyinPlugin();
 
 const visible = ref(false);

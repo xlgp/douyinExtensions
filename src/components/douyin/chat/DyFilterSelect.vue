@@ -2,19 +2,14 @@
   <el-form-item :label="label">
     <el-select
       class="dy-filter-select"
-      v-model="filterFields"
+      v-model="filterFieldList"
       filterable
       allow-create
       multiple
       popper-class="dy-filter-select-popper"
       default-first-option
     >
-      <el-option
-        v-for="item in filterFieldList"
-        :key="item.value"
-        :label="item.value"
-        :value="item.value"
-      />
+      <el-option v-for="item in filterFieldList" :key="item" :label="item" :value="item" />
     </el-select>
   </el-form-item>
 </template>
@@ -28,8 +23,9 @@ const { label } = useFilterSelect();
 
 const { filterFieldList } = storeToRefs(chatStore);
 
-const fields = filterFieldList.value.map((item) => item.value);
-const filterFields = ref(fields);
+watch(() => chatStore.filterFieldList, () => {
+  chatStore.saveFilterFieldList();
+});
 
 </script>
 <style>
@@ -44,6 +40,7 @@ const filterFields = ref(fields);
 
 .dy-filter-select-popper .el-select-dropdown__item {
   color: var(--el-color-info-light-5);
+  display: inherit;
 }
 .dy-filter-select-popper
   .el-select-dropdown.is-multiple

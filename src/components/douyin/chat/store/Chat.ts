@@ -3,19 +3,7 @@ import {
   ChatRoomItem,
   filterFieldDefaultValue,
   filterFieldKey,
-  filterNicknameDefaultValue,
-  filterNicknameKey,
-  SelectOptiontype,
 } from "../constant";
-
-function getLocalNickname() {
-  let localName = localStorage.getItem(filterNicknameKey);
-  if (!localName) {
-    localStorage.setItem(filterNicknameKey, filterNicknameDefaultValue);
-    localName = filterNicknameDefaultValue;
-  }
-  return localName;
-}
 
 function getLocalFilterField() {
   let value = localStorage.getItem(filterFieldKey);
@@ -27,20 +15,16 @@ function getLocalFilterField() {
 }
 
 function parseLocalFilterField(value: string) {
-  return value
-    .trim()
-    .split(",")
-    .map((value) => {
-      let o = value.trim().split("|");
-      return {
-        value: o[0].trim(),
-      };
+  let list = value.trim().split(",");
+  if (!list) return [];
+  return list
+    .filter((value: string) => value && value.trim())
+    .map<string>((value: string): string => {
+      return value.trim();
     });
 }
 
 export const useChatStore = defineStore("dyChatStore", () => {
-  const filterNickname = ref(getLocalNickname());
-
   const filterFieldList = ref(parseLocalFilterField(getLocalFilterField()));
 
   const filterChatItems = ref<ChatRoomItem[]>([]);
@@ -52,15 +36,14 @@ export const useChatStore = defineStore("dyChatStore", () => {
     filterChatItems.value.push(item);
   }
 
-  function saveFilterNickname() {
-    localStorage.setItem(filterNicknameKey, filterNickname.value);
+  function saveFilterFieldList() {
+    localStorage.setItem(filterFieldKey, filterFieldList.value.join(","));
   }
   return {
-    filterNickname,
     filterFieldList,
     filterChatItemIds,
     filterChatItems,
     setFilterChatItems,
-    saveFilterNickname,
+    saveFilterFieldList,
   };
 });

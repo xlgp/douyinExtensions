@@ -160,13 +160,22 @@ export default () => {
   }
 
   /**
-   * 判断是否包含用户昵称
+   * 判断是否包含过滤数据
    * @param elem
    * @param nickname
    * @returns true or false
    */
-  function isContainAtUser(elem: Element, nickname: string) {
-    return nickname && (elem as HTMLElement).innerText.includes(nickname);
+  function isContainFilterField(elem: Element, filterFields: string[]) {
+    if (filterFields && filterFields.length > 0) {
+      let innerText = (elem as HTMLElement).innerText;
+      for (let i = 0; i < filterFields.length; i++) {
+        const field = filterFields[i];
+        if (innerText.includes(field)) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   /**
@@ -217,7 +226,7 @@ export default () => {
   }
 
   function getFilterFieldItems() {
-    return chatStore.filterNickname;
+    return chatStore.filterFieldList;
   }
 
   function init() {
@@ -229,7 +238,7 @@ export default () => {
       let liveElem = document.querySelector(
         "[data-e2e='living-container']"
       ) as HTMLElement;
-
+      console.log("ddddddddddddddddddddddddddddddddd", liveElem);
       togglePlayerView(liveElem, false);
 
       addNicknameListener((nickname: string) =>
@@ -240,7 +249,7 @@ export default () => {
         (elem: Element, itemId: string) => {
           return (
             !chatStore.filterChatItemIds.includes(itemId) &&
-            isContainAtUser(elem, getFilterFieldItems())
+            isContainFilterField(elem, getFilterFieldItems())
           );
         },
         (elem: HTMLElement, itemId: string) => {

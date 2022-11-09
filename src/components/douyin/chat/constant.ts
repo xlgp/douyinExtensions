@@ -11,11 +11,8 @@ export interface ChatProvideType {
   close: () => void;
 }
 
-export const filterNicknameKey = "DyFilterNickname";
-export const filterNicknameDefaultValue = "僻";
-
-export const filterFieldKey = "DyFilterFieldKey";
-export const filterFieldDefaultValue = "僻";
+export const filterFieldKey = "DyFilterField";
+export const filterFieldDefaultValue = "僻,心灵";
 
 export interface SelectOptiontype {
   value: string;
