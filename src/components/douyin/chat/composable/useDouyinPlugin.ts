@@ -90,10 +90,11 @@ export default () => {
 
         if (
             nickname &&
-            textAreaElem &&
-            !isContainAtNickname(nickname, textAreaElem.value)
+            textAreaElem
         ) {
-            textAreaElem.value += getAtNickname(nickname);
+            if (!isContainAtNickname(nickname, textAreaElem.value)) {
+                textAreaElem.value += getAtNickname(nickname);
+            }
             if (focus) {
                 setTimeout(() => {
                     textAreaElem.focus();
