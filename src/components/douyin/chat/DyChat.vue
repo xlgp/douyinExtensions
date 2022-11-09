@@ -41,9 +41,9 @@ provide<ChatProvideType>(chatProvideKey, { close });
 </script>
 <style>
 .el-popover.dy-el-popover {
-  background-color: #1e1e1ed1;
+  background-color: #060716d1;
   padding: 0;
-  border-color: #64646442;
+  border-color: #060716d1;
 }
 .el-popover.dy-el-popover .el-popover__title {
   color: var(--el-color-info-light-9);
