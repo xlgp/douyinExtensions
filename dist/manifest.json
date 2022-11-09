@@ -1,7 +1,7 @@
 {
     "name": "抖音插件",
     "description": "抖音样式插件",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "manifest_version": 3,
     "icons": {
         "128": "assets/favicon.ico"
@@ -27,7 +27,7 @@
                 "content-scripts/live-douyin.js"
             ],
             "css": [
-                "assets/live-douyin.95e9a491.css"
+                "assets/live-douyin.6a3bdc25.css"
             ]
         }
     ]
