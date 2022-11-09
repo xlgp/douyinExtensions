@@ -95,7 +95,9 @@ export default () => {
         ) {
             textAreaElem.value += getAtNickname(nickname);
             if (focus) {
-                textAreaElem.focus();
+                setTimeout(() => {
+                    textAreaElem.focus();
+                }, 200);
             }
         }
     }
