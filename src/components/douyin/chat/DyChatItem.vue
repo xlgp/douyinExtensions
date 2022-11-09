@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="item">
-      <div class="nickname">{{ nickname }}</div>
+      <div class="nickname">{{ showTime }} {{ nickname }}</div>
       <div>{{ data.content }}</div>
     </div>
     <el-button plain class="btn" size="small" @click="handleReply">回复</el-button>
@@ -21,7 +21,21 @@ const props = defineProps({
 });
 const { data } = toRefs(props);
 const nickname = computed(() => {
-  return data.value.nickname + ":";
+  return "@" + data.value.nickname + ":";
+});
+
+const showTime = computed(() => {
+  let date: Date = data.value.createdAt;
+  let h = date.getHours();
+  let m = date.getMinutes();
+  let s = date.getSeconds();
+  return (
+    ((h < 10 && "0" + h) || h) +
+    ":" +
+    ((m < 10 && "0" + m) || m) +
+    ":" +
+    ((s < 10 && "0" + s) || s)
+  );
 });
 
 const { insertNicknameToTextAreaElem } = useDouyinPlugin();
