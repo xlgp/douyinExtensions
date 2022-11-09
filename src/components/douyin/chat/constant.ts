@@ -1,18 +1,22 @@
 export interface ChatRoomItem {
-    nickname: string;
-    content: string;
-    createdAt: Date;
-    itemId: string;
+  nickname: string;
+  content: string;
+  createdAt: Date;
+  itemId: string;
 }
 
 export const chatProvideKey = Symbol();
 
 export interface ChatProvideType {
-    close: () => void
+  close: () => void;
 }
 
 export const filterNicknameKey = "DyFilterNickname";
 export const filterNicknameDefaultValue = "僻";
 
 export const filterFieldKey = "DyFilterFieldKey";
-export const filterFieldDefaultValue="僻";
+export const filterFieldDefaultValue = "僻";
+
+export interface SelectOptiontype {
+  value: string;
+}

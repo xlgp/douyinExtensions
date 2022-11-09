@@ -28,7 +28,8 @@ const { label } = useFilterSelect();
 
 const { filterFieldList } = storeToRefs(chatStore);
 
-const filterFields = ref(filterFieldList.value.map((item) => item.value));
+const fields = filterFieldList.value.map((item) => item.value);
+const filterFields = ref(fields);
 
 </script>
 <style>
@@ -47,7 +48,9 @@ const filterFields = ref(filterFieldList.value.map((item) => item.value));
 .dy-filter-select-popper
   .el-select-dropdown.is-multiple
   .el-select-dropdown__item.selected,
-.dy-filter-select-popper .el-select-dropdown.is-multiple .el-select-dropdown__item.hover {
+.dy-filter-select-popper
+  .el-select-dropdown.is-multiple
+  .el-select-dropdown__item.hover {
   background-color: #0e0e1c26;
 }
 .dy-filter-select-popper.el-select__popper {
