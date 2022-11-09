@@ -2,7 +2,6 @@
   <div>
     <icon-css3 @click="dialogVisible = true" />
     <el-dialog
-      class="dy-dialog dy-css-dialog"
       v-model="dialogVisible"
       :modal="dialogOptions.modal"
       :close-on-click-modal="dialogOptions['close-on-click-modal']"
