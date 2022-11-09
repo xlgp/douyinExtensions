@@ -7,6 +7,13 @@
 import { storeToRefs } from "pinia";
 import { useChatStore } from "./store/Chat";
 const label = "用户昵称";
+const chatStore = useChatStore();
+const { filterNickname } = storeToRefs(chatStore);
 
-const { filterNickname } = storeToRefs(useChatStore());
+watch(
+  () => chatStore.filterNickname,
+  () => {
+    chatStore.saveFilterNickname();
+  }
+);
 </script>
