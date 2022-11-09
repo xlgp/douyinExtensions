@@ -4,7 +4,7 @@
       <div class="nickname">{{ nickname }}</div>
       <div>{{ data.content }}</div>
     </div>
-    <el-button plain class="btn" @click="handleReply">回复</el-button>
+    <el-button plain class="btn" size="small" @click="handleReply">回复</el-button>
   </div>
 </template>
 <script lang="ts" setup>
@@ -45,12 +45,17 @@ const handleReply = () => {
 .nickname {
   color: var(--el-color-info-light-5);
   font-size: small;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .item {
   flex: auto;
+  display: grid;
 }
 .btn {
   background-color: #1617221f;
   color: var(--el-color-info-light-5);
+  margin-left: 6px;
 }
 </style>

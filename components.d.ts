@@ -9,7 +9,6 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Douyin: typeof import('./src/components/douyin/index.vue')['default']
     DyChat: typeof import('./src/components/douyin/chat/DyChat.vue')['default']
-    DyChatDialog: typeof import('./src/components/douyin/chat/DyChatDialog.vue')['default']
     DyChatItem: typeof import('./src/components/douyin/chat/DyChatItem.vue')['default']
     DyChatList: typeof import('./src/components/douyin/chat/DyChatList.vue')['default']
     DyNicknameForm: typeof import('./src/components/douyin/chat/DyNicknameForm.vue')['default']
@@ -17,8 +16,6 @@ declare module '@vue/runtime-core' {
     DyVideoForm: typeof import('./src/components/douyin/video/DyVideoForm.vue')['default']
     DyVideoHeader: typeof import('./src/components/douyin/video/DyVideoHeader.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
-    ElCard: typeof import('element-plus/es')['ElCard']
-    ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']

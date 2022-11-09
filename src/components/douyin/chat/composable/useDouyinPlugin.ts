@@ -194,12 +194,14 @@ export default () => {
         }
     }
 
-    function getChatroomItem(elem: HTMLElement): ChatRoomItem {
+    function getChatroomItem(elem: HTMLElement, itemId: string): ChatRoomItem {
         let content = (elem.children[2] as HTMLElement).innerText;
         let nickname = getNickname(elem.children[1]);
         return {
             nickname,
             content,
+            createdAt: new Date,
+            itemId: itemId
         };
     }
 
@@ -225,8 +227,8 @@ export default () => {
                 (elem: Element) => {
                     return isContainAtUser(elem, getFilterNickname());
                 },
-                (elem: HTMLElement, id: string) => {
-                    let item = getChatroomItem(elem);
+                (elem: HTMLElement, itemId: string) => {
+                    let item = getChatroomItem(elem, itemId);
                     chatStore.setFilterChatItems(item);
                 }
             );

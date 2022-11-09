@@ -9,7 +9,12 @@ export default () => {
             clearInterval(id);
             return;
         }
-        chatStore.filterChatItems.push({ content: "内容......." + len, nickname: "昵称" + len });
+        chatStore.filterChatItems.push({
+            content: "内容......." + len,
+            nickname: "昵称" + len,
+            itemId: (new Date).getTime() + "",
+            createdAt: new Date
+        });
     }, 2000);
 
 

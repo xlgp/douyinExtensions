@@ -16,6 +16,6 @@
     },
     "content_scripts": [{
         "matches": ["*://live.douyin.com/*"],
-        "js": ["content-scripts/live-douyin.ts", "content-scripts/douyin-plugin.ts"]
+        "js": ["content-scripts/live-douyin.ts"]
     }]
 }

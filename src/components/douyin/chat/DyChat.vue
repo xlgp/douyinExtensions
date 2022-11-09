@@ -1,12 +1,14 @@
 <template>
   <el-popover
     popper-class="dy-el-popover"
-    placement="left"
+    placement="left-end"
     effect="dark"
+    :show-arrow="false"
+    :offset="5"
     :visible="visible"
     :title="chatOptions.title"
     :width="chatOptions.width"
-    :hide-after="20"
+    :hide-after="100"
     :persistent="false"
   >
     <template #reference>

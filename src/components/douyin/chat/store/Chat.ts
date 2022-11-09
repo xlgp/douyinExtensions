@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import { ChatRoomItem } from '../constant';
 
-
 export const useChatStore = defineStore('dyChatStore', () => {
     const filterNickname = ref("僻");
     const filterChatItems = ref<ChatRoomItem[]>([]);
