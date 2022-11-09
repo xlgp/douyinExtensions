@@ -15,6 +15,7 @@
       <icon-chat @click="handleClick" />
     </template>
     <div style="padding: 10px">
+      <dy-filter-select />
       <dy-nickname-form />
       <dy-chat-list />
     </div>

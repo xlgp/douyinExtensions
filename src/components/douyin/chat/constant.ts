@@ -13,3 +13,6 @@ export interface ChatProvideType {
 
 export const filterNicknameKey = "DyFilterNickname";
 export const filterNicknameDefaultValue = "僻";
+
+export const filterFieldKey = "DyFilterFieldKey";
+export const filterFieldDefaultValue="僻";

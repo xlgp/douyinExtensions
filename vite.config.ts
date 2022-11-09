@@ -28,7 +28,8 @@ export default defineConfig({
     ],
     resolvers: [ElementPlusResolver()],
     imports: [
-      'vue'
+      'vue',
+      'pinia'
     ],
   }),
   Components({

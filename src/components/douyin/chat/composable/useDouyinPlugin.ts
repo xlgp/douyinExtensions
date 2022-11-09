@@ -1,8 +1,10 @@
 import { ChatRoomItem } from "../constant";
 import { useChatStore } from "../store/Chat";
+import useRemoveChatData from "./useRemoveChatData";
 
 export default () => {
     const chatStore = useChatStore();
+    useRemoveChatData();
     /**
      * 
      * @param toggle 

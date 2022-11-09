@@ -1,8 +1,4 @@
 <template>
-  <el-config-provider :z-index="zIndex">
-    <douyin />
-  </el-config-provider>
+  <douyin />
 </template>
-<script setup lang="ts">
-const zIndex = ref(10240);
-</script>
+<script setup lang="ts"></script>

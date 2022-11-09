@@ -4,7 +4,6 @@
   </el-form-item>
 </template>
 <script lang="ts" setup>
-import { storeToRefs } from "pinia";
 import { useChatStore } from "./store/Chat";
 const label = "用户昵称";
 const chatStore = useChatStore();
