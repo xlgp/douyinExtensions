@@ -58,7 +58,7 @@ const handleReply = () => {
 }
 .nickname {
   color: var(--el-color-info-light-5);
-  font-size: small;
+  font-size: 0.8em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

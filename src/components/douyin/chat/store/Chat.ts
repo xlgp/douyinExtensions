@@ -11,6 +11,8 @@ export const useChatStore = defineStore('dyChatStore', () => {
     const filterNickname = ref(localName);
 
     const filterChatItems = ref<ChatRoomItem[]>([]);
+    const filterChatItemIds = computed(() => filterChatItems.value.map(item => item.itemId));
+
     function setFilterChatItems(item: ChatRoomItem) {
         filterChatItems.value.push(item);
     }
@@ -18,5 +20,5 @@ export const useChatStore = defineStore('dyChatStore', () => {
     function saveFilterNickname() {
         localStorage.setItem(filterNicknameKey, filterNickname.value);
     }
-    return { filterNickname, filterChatItems, setFilterChatItems, saveFilterNickname }
+    return { filterNickname, filterChatItemIds, filterChatItems, setFilterChatItems, saveFilterNickname }
 })

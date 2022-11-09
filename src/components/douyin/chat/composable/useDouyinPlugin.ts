@@ -169,15 +169,15 @@ export default () => {
         // 当观察到变动时执行的回调函数
         const observerCallback = function (
             mutationsList: MutationRecord[]) {
-            // Use traditional 'for loops' for IE 11
             for (let mutation of mutationsList) {
-                for (let i = 0; i < mutation.addedNodes.length; i++) {
-                    const node = mutation.addedNodes[i] as HTMLElement;
+                let addedNodes = mutation.addedNodes;
+                for (let i = 0; i < addedNodes.length; i++) {
+                    const node = addedNodes[i] as HTMLElement;
                     let item = node.childNodes[0] as HTMLElement;
                     if (item.classList.contains("webcast-chatroom__room-message")) {
                         continue;
                     }
-                    if (filter(item.children[2])) {
+                    if (filter(item.children[2], node.dataset.id)) {
                         callback(item, node.dataset.id);
                     }
                 }
@@ -213,7 +213,7 @@ export default () => {
 
     function init() {
         toggleOtherDom(false);
-        toggleLivingPlayer();
+        // toggleLivingPlayer();
 
         try {
             //获取直播区域
@@ -223,11 +223,11 @@ export default () => {
 
             togglePlayerView(liveElem, false);
 
-            addNicknameListener(insertNicknameToTextAreaElem);
+            addNicknameListener((nickname: string) => insertNicknameToTextAreaElem(nickname, true));
 
             mutationObserver(
-                (elem: Element) => {
-                    return isContainAtUser(elem, getFilterNickname());
+                (elem: Element, itemId: string) => {
+                    return !chatStore.filterChatItemIds.includes(itemId) && isContainAtUser(elem, getFilterNickname());
                 },
                 (elem: HTMLElement, itemId: string) => {
                     let item = getChatroomItem(elem, itemId);
