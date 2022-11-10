@@ -35,7 +35,6 @@ export default () => {
         nextElem && (nextElem.style.display = (toggle && "block") || "none");
     }
 
-
     /**
      * 切换直播画面的显示与隐藏
      */
@@ -43,8 +42,9 @@ export default () => {
         let videoElem = document.getElementsByTagName(
             "video"
         )[0] as HTMLVideoElement;
-        videoElem.addEventListener("click", (e) => {
-            let display = videoElem.style.display || "none";
+        let playerElem = document.getElementsByClassName("living_player")[0] as HTMLElement;
+        playerElem.addEventListener("dblclick", e => {
+            let display = videoElem.style.display || "block";
             videoElem.style.display = (display == "none" && "block") || "none";
         });
     }
