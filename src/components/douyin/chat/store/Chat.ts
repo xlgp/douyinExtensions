@@ -36,6 +36,10 @@ export const useChatStore = defineStore("dyChatStore", () => {
     filterChatItems.value.push(item);
   }
 
+  function clearFilterChatItems() {
+    filterChatItems.value.length = 0;
+  }
+
   function saveFilterFieldList() {
     localStorage.setItem(filterFieldKey, filterFieldList.value.join(","));
   }
@@ -44,6 +48,7 @@ export const useChatStore = defineStore("dyChatStore", () => {
     filterChatItemIds,
     filterChatItems,
     setFilterChatItems,
+    clearFilterChatItems,
     saveFilterFieldList,
   };
 });
