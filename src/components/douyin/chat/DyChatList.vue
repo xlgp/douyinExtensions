@@ -1,6 +1,6 @@
 <template>
   <div class="tips-wrap">
-    <span>共有{{ items.length }}项</span>
+    <span>共有 {{ items.length }} 项</span>
     <el-button @click="handleClear" text plain size="small" type="danger">清空</el-button>
   </div>
   <el-scrollbar ref="scrollbarRef" height="300px">
