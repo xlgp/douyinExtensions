@@ -1,31 +1,18 @@
 import { defineStore } from "pinia";
+import { getLocalFilterField } from "../../composable/useStorage";
+import { parseLocalFilterField } from "../composable/useChatUtil";
 import {
   ChatRoomItem,
-  filterFieldDefaultValue,
   filterFieldKey,
 } from "../constant";
 
-function getLocalFilterField() {
-  let value = localStorage.getItem(filterFieldKey);
-  if (!value) {
-    localStorage.setItem(filterFieldKey, filterFieldDefaultValue);
-    value = filterFieldDefaultValue;
-  }
-  return value;
-}
-
-function parseLocalFilterField(value: string) {
-  let list = value.trim().split(",");
-  if (!list) return [];
-  return list
-    .filter((value: string) => value && value.trim())
-    .map<string>((value: string): string => {
-      return value.trim();
-    });
-}
-
 export const useChatStore = defineStore("dyChatStore", () => {
   const filterFieldList = ref(parseLocalFilterField(getLocalFilterField()));
+
+  /**
+   * 最新一次查看面板的时间
+   */
+  const lastVisitDyChatTime = ref<number>((new Date).getTime());
 
   const filterChatItems = ref<ChatRoomItem[]>([]);
   const filterChatItemIds = computed(() =>
@@ -43,10 +30,32 @@ export const useChatStore = defineStore("dyChatStore", () => {
   function saveFilterFieldList() {
     localStorage.setItem(filterFieldKey, filterFieldList.value.join(","));
   }
+
+  function setLastVisitDyChatTime() {
+    lastVisitDyChatTime.value = new Date().getTime();
+  }
+
+  const unreadChatItemCount = computed(() => {
+    let items = filterChatItems.value;
+    let count = 0;
+    for (let i = items.length - 1; i >= 0; i--) {
+      const item = items[i];
+      if (item.createdAt.getTime() > lastVisitDyChatTime.value) {
+        count++;
+        continue;
+      }
+      break;
+    }
+    return count;
+  });
+
   return {
     filterFieldList,
     filterChatItemIds,
     filterChatItems,
+    lastVisitDyChatTime,
+    unreadChatItemCount,
+    setLastVisitDyChatTime,
     setFilterChatItems,
     clearFilterChatItems,
     saveFilterFieldList,

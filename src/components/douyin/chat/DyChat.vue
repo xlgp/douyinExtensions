@@ -12,7 +12,9 @@
     :persistent="false"
   >
     <template #reference>
-      <icon-chat @click="handleClick" />
+      <el-badge :value="chatStore.unreadChatItemCount" :hidden="badgeHidden">
+        <icon-chat @click="handleClick" />
+      </el-badge>
     </template>
     <div style="padding: 10px">
       <dy-filter-select />
@@ -25,14 +27,18 @@ import usechatOptions from "./composable/usedychatOptions";
 import { chatProvideKey, ChatProvideType } from "./constant";
 import useDonyinPlugin from "./composable/useDouyinPlugin";
 import useChatStyle from "./composable/useChatStyle";
+import { useChatStore } from "./store/Chat";
 
+const chatStore = useChatStore();
+const { chatOptions } = usechatOptions();
+useDonyinPlugin();
 useChatStyle();
 
-const { chatOptions } = usechatOptions();
-
-useDonyinPlugin();
-
 const visible = ref(false);
+
+const badgeHidden = computed(() => {
+  return visible.value || chatStore.unreadChatItemCount == 0;
+});
 
 const close = () => {
   visible.value = false;
@@ -41,8 +47,20 @@ const close = () => {
 const handleClick = () => {
   visible.value = !visible.value;
 };
+
+watch(visible, () => {
+  chatStore.setLastVisitDyChatTime();
+});
+
 provide<ChatProvideType>(chatProvideKey, { close });
 </script>
+<style scoped>
+:deep(.el-badge__content.is-fixed) {
+  top: 0;
+  right: initial;
+  transform: translateY(-30%) translateX(-50%);
+}
+</style>
 <style>
 .el-popover.dy-el-popover {
   background-color: #060716d1;

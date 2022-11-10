@@ -66,3 +66,13 @@ export function insertNicknameToTextAreaElem(
         }
     }
 }
+
+export function parseLocalFilterField(value: string) {
+    let list = value.trim().split(",");
+    if (!list) return [];
+    return list
+        .filter((value: string) => value && value.trim())
+        .map<string>((value: string): string => {
+            return value.trim();
+        });
+}
