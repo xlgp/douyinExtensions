@@ -26,7 +26,7 @@
             "js": [
                 "content-scripts/live-douyin.js"
             ],
-            "css":["assets/live-douyin.3b9e74e3.css "]
+            "css":["assets/live-douyin.3b9e74e3.css"]
         }
     ]
 }
