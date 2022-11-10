@@ -1,7 +1,7 @@
 {
     "name": "抖音插件",
     "description": "调整抖音直播画面样式，根据关键字过滤聊天内容",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "manifest_version": 3,
     "icons": {
         "128": "assets/favicon.ico"
@@ -26,7 +26,7 @@
             "js": [
                 "content-scripts/live-douyin.js"
             ],
-            "css":["assets/live-douyin.3b9e74e3.css"]
+            "css":["assets/live-douyin.092aad2d.css"]
         }
     ]
 }
