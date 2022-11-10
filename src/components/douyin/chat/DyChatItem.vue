@@ -8,7 +8,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import useDouyinPlugin from "./composable/useDouyinPlugin";
+import { insertNicknameToTextAreaElem } from "./composable/useChatUtil";
 import { chatProvideKey, ChatProvideType } from "./constant";
 
 const { close } = inject<ChatProvideType>(chatProvideKey, {} as ChatProvideType);
@@ -37,8 +37,6 @@ const showTime = computed(() => {
     ((s < 10 && "0" + s) || s)
   );
 });
-
-const { insertNicknameToTextAreaElem } = useDouyinPlugin();
 
 const handleReply = () => {
   close();

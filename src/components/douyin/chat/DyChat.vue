@@ -24,6 +24,10 @@
 import usechatOptions from "./composable/usedychatOptions";
 import { chatProvideKey, ChatProvideType } from "./constant";
 import useDonyinPlugin from "./composable/useDouyinPlugin";
+import useChatStyle from "./composable/useChatStyle";
+
+useChatStyle();
+
 const { chatOptions } = usechatOptions();
 
 useDonyinPlugin();
