@@ -49,6 +49,35 @@ export default () => {
         });
     }
 
+    /**
+     * 重新调整直播用户名的位置
+     * @returns 
+     */
+    function insertLiveRoomNicknameElem() {
+        let nicknameElem = document.querySelector('[data-e2e="live-room-nickname"]') as HTMLElement;
+        if (!nicknameElem) { return; }
+        let avatarElem = nicknameElem.previousElementSibling as HTMLElement;
+
+        let xgLeftGridElem = null;
+        let xgLeftGridElemHieght = 0;
+        try {
+            xgLeftGridElem = document.getElementsByTagName("xg-controls")[0].getElementsByTagName("xg-left-grid")[0];
+            xgLeftGridElemHieght = xgLeftGridElem.clientHeight;
+        } catch (error) {
+            console.error(error);
+            return;
+        }
+        if (avatarElem) {
+            avatarElem.style.marginTop = (xgLeftGridElemHieght - avatarElem.clientHeight) / 2 + "px";
+            xgLeftGridElem.append(avatarElem);
+        }
+
+        nicknameElem.style.lineHeight = xgLeftGridElemHieght + "px";
+        nicknameElem.style.color = "#fff";
+        nicknameElem.style.marginLeft = "4px";
+        xgLeftGridElem.append(nicknameElem);
+    }
+
     function init() {
         //获取直播区域
         let liveElem = document.querySelector(
@@ -56,6 +85,7 @@ export default () => {
         ) as HTMLElement;
         toggleOtherDom(false);
         toggleLivingPlayer();
+        insertLiveRoomNicknameElem();
         togglePlayerView(liveElem, false);
     }
     setTimeout(() => {
