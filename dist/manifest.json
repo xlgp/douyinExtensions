@@ -1,7 +1,7 @@
 {
     "name": "抖音插件",
     "description": "抖音样式插件",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "manifest_version": 3,
     "icons": {
         "128": "assets/favicon.ico"
@@ -9,14 +9,26 @@
     "background": {
         "service_worker": "background.js"
     },
-    "permissions": ["storage", "activeTab", "scripting"],
+    "permissions": [
+        "storage",
+        "activeTab",
+        "scripting"
+    ],
     "action": {
         "default_title": "Vue Popup",
         "default_icon": "assets/favicon.ico"
     },
-    "content_scripts": [{
-        "matches": ["*://live.douyin.com/*"],
-        "js": ["content-scripts/live-douyin.js"],
-        "css": ["assets/live-douyin.3eed35cb.css"]
-    }]
+    "content_scripts": [
+        {
+            "matches": [
+                "*://live.douyin.com/*"
+            ],
+            "js": [
+                "content-scripts/live-douyin.js"
+            ],
+            "css": [
+                "assets/live-douyin.3b9e74e3.css"
+            ]
+        }
+    ]
 }
