@@ -4,7 +4,7 @@ export default () => {
         title: "@用户的列表",
         modal: false,
         "close-on-click-modal": false,
-        width: (chatElem && chatElem.offsetWidth || 300) + "px",
+        width: (chatElem && chatElem.clientWidth || 300) + "px",
       });
     return {
         chatOptions
