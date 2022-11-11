@@ -26,7 +26,10 @@ declare module '@vue/runtime-core' {
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSlider: typeof import('element-plus/es')['ElSlider']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
+    ElTabPane: typeof import('element-plus/es')['ElTabPane']
+    ElTabs: typeof import('element-plus/es')['ElTabs']
     IconChat: typeof import('./src/components/icon/IconChat.vue')['default']
     IconCss3: typeof import('./src/components/icon/IconCss3.vue')['default']
+    Zimu: typeof import('./src/components/douyin/zimu/index.vue')['default']
   }
 }
