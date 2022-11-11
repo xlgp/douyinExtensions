@@ -33,4 +33,10 @@ const handleClear = () => {
   flex: auto;
   color: var(--el-color-info-light-5);
 }
+.tips-wrap .el-button.is-text:not(.is-disabled):focus,
+.tips-wrap .el-button.is-text:not(.is-disabled):hover {
+  background-color: #f5c0c052;
+  color: #fff;
+  outline: 1px solid #f5c0c0d6;
+}
 </style>
