@@ -1,10 +1,13 @@
 <template>
-  <div class="wrap">
-    <div class="item">
-      <div class="nickname">{{ showTime }} {{ nickname }}</div>
-      <div>{{ data.content }}</div>
+  <div>
+    <slot></slot>
+    <div class="wrap">
+      <div class="item">
+        <div class="nickname">{{ showTime }} {{ nickname }}</div>
+        <div>{{ data.content }}</div>
+      </div>
+      <el-button plain class="btn" size="small" @click="handleReply">回复</el-button>
     </div>
-    <el-button plain class="btn" size="small" @click="handleReply">回复</el-button>
   </div>
 </template>
 <script lang="ts" setup>

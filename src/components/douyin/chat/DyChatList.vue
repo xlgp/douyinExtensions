@@ -4,7 +4,13 @@
     <el-button @click="handleClear" text plain size="small" type="danger">清空</el-button>
   </div>
   <el-scrollbar ref="scrollbarRef" height="300px">
-    <DyChatItem @vnode-mounted="handleChildMounted" v-for="item in items" :data="item" />
+    <DyChatItem
+      @vnode-mounted="handleChildMounted"
+      v-for="(item, index) in items"
+      :data="item"
+    >
+      <div v-if="showTips(index)" class="tips">最新信息</div>
+    </DyChatItem>
   </el-scrollbar>
 </template>
 <script setup lang="ts">
@@ -14,6 +20,10 @@ const scrollbarRef = ref();
 
 const chatStore = useChatStore();
 const items = chatStore.filterChatItems;
+
+const showTips = (index: number) => {
+  return chatStore.lastUnReadDyChatIndex == index;
+};
 
 const handleChildMounted = () => {
   let scrollHeight = scrollbarRef.value.wrap$.scrollHeight;
@@ -25,6 +35,30 @@ const handleClear = () => {
 };
 </script>
 <style scoped>
+.tips {
+  text-align: center;
+  font-size: 11px;
+  margin: 10px 0px;
+  color: var(--el-color-info-light-3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tips:before,
+.tips:after {
+  content: "";
+  height: 0px;
+  border-bottom: 1px solid;
+  flex: 1 1;
+}
+
+.tips:after {
+  margin: 0 40px 0 20px;
+}
+.tips::before {
+  margin: 0 20px 0 40px;
+}
 .tips-wrap {
   display: flex;
   margin-bottom: 10px;

@@ -1,11 +1,13 @@
 import { useChatStore } from "../store/Chat"
 
+const size = 60;
+
 export default () => {
 
     let chatStore = useChatStore();
     let id = setInterval(() => {
         let len = chatStore.filterChatItems.length
-        if (len > 20) {
+        if (len > size) {
             clearInterval(id);
             return;
         }

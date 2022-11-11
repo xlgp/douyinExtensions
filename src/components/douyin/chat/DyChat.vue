@@ -48,8 +48,10 @@ const handleClick = () => {
   visible.value = !visible.value;
 };
 
-watch(visible, () => {
-  chatStore.setLastVisitDyChatTime();
+watch(visible, (value) => {
+  if (!value) {
+    chatStore.setLastVisitDyChatTime();
+  }
 });
 
 provide<ChatProvideType>(chatProvideKey, { close });
