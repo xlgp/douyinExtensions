@@ -8,6 +8,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Changci: typeof import('./src/components/douyin/zimu/changci/index.vue')['default']
+    ChangCiItem: typeof import('./src/components/douyin/zimu/changci/ChangCiItem.vue')['default']
     Changduan: typeof import('./src/components/douyin/zimu/changduan/index.vue')['default']
     ChangDuanItem: typeof import('./src/components/douyin/zimu/changduan/ChangDuanItem.vue')['default']
     Douyin: typeof import('./src/components/douyin/index.vue')['default']

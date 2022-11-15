@@ -1,27 +1,17 @@
-import { ChangCiType, ChangDuanItemType } from "../data";
+import { ChangCiType, ChangDuanDetailType, ChangDuanType } from "../data";
 
 export default () => {
-  const getChangduanItem = (): ChangDuanItemType[] => {
-    return [
-      {
-        id: 0,
-        name: "树上鸟儿成双对",
-        originName: "树上鸟儿成双对",
-        juZhong: "黄梅戏",
-        juMu: "天仙配",
-        originJuMu: "天仙配",
-        offset: -10,
-      },
-      {
+  const getChangDuanDetail = (): ChangDuanDetailType => {
+      const data = {
         id: 1,
-        name: "谁料皇榜中状元",
-        originName: "谁料皇榜中状元",
+        name: "春风送暖到襄阳",
+        originName: "春风送暖到襄阳",
         juZhong: "黄梅戏",
         juMu: "女驸马",
         originJuMu: "女驸马",
         offset: -10,
-      },
-    ] as ChangDuanItemType[];
+      };
+    return data as ChangDuanDetailType;
   };
   const getChangCiList = (): ChangCiType[] => {
     return [
@@ -133,8 +123,17 @@ export default () => {
       },
     ];
   };
+
+  function getChangDuan(){
+    return{
+      detail:getChangDuanDetail(),
+      changCiList:getChangCiList()
+    }as ChangDuanType;
+  }
+
   return {
-    getChangduanItem,
+    getChangDuanDetail,
     getChangCiList,
+    getChangDuan
   };
 };

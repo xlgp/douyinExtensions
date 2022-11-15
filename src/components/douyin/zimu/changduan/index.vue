@@ -3,8 +3,8 @@
 </template>
 <script setup lang="ts">
 import useInitData from "../composable/useInitData";
-import { ChangDuanItemType } from "../data.d";
-const { getChangduanItem } = useInitData();
+import { ChangDuanDetailType } from "../data.d";
+const { getChangDuanDetail } = useInitData();
 
-const datalist: ChangDuanItemType[] = reactive(getChangduanItem());
+const datalist: ChangDuanDetailType[] = reactive([getChangDuanDetail()]);
 </script>

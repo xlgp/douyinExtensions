@@ -1,16 +1,15 @@
 <template>
-  <div class="changci-item" v-for="(changci, index) in changCiList" :key="index">
-    <div class="changci-text">{{ changci.content }}</div>
-  </div>
+  <ChangCiItem
+    v-for="(changci, index) in changCiList"
+    :key="index"
+    :changci="changci"
+    :is-active="false"
+  />
 </template>
-<script setup lang="ts">import useInitData from "../composable/useInitData";
+<script setup lang="ts">
+import { useZimuStore } from "../store/Zimu";
 
-const { getChangCiList } = useInitData();
-const changCiList = reactive(getChangCiList());
+const { activatedChangDuan } = useZimuStore();
+
+const changCiList = reactive(activatedChangDuan.changCiList);
 </script>
-<style scoped>
-.changci-text {
-  white-space: nowrap;
-  overflow: hidden;
-}
-</style>

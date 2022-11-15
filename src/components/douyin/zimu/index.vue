@@ -24,12 +24,19 @@ const { activeName, tabPaneList, tabsRef, height } = useZimu();
   top: 100px;
   width: 360px;
   transition: none;
-  background-color: #fff;
+  background-color: #060716a8;
   padding: 10px 20px;
   border-radius: 4px;
+  color: var(--el-color-info-light-5);
 }
 :deep(.el-tabs__header) {
   cursor: move;
   user-select: none;
+}
+:deep(.el-tabs__item) {
+  color: var(--el-color-info-light-5);
+}
+:deep(.el-tabs__item.is-active) {
+  color: var(--el-color-primary);
 }
 </style>

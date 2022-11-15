@@ -3,7 +3,7 @@ export interface ChangCiType {
     delayTime: number,
     delayTimeText: string
 }
-export interface ChangDuanItemType {
+export interface ChangDuanDetailType {
     id:number,
     name: string,
     originName: string,
@@ -13,7 +13,11 @@ export interface ChangDuanItemType {
     beiZhu?: string,
     offset: number,
 }
+/**
+ * index:当前actived唱词的下标
+ */
 export interface ChangDuanType {
-    item: ChangDuanItemType,
-    changCiList: ChangCiType[]
+    detail: ChangDuanDetailType,
+    changCiList: ChangCiType[],
+    index:number,
 }
