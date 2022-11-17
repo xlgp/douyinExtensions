@@ -21,9 +21,7 @@ declare module '@vue/runtime-core' {
     DyVideoHeader: typeof import('./src/components/douyin/video/DyVideoHeader.vue')['default']
     ElBadge: typeof import('element-plus/es')['ElBadge']
     ElButton: typeof import('element-plus/es')['ElButton']
-    ElCard: typeof import('element-plus/es')['ElCard']
     ElDialog: typeof import('element-plus/es')['ElDialog']
-    ElDialogContent: typeof import('element-plus/es')['ElDialogContent']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElOption: typeof import('element-plus/es')['ElOption']
@@ -34,8 +32,11 @@ declare module '@vue/runtime-core' {
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
+    Emoji: typeof import('./src/components/douyin/emoji/index.vue')['default']
+    Icon: typeof import('./src/components/douyin/emoji/icon.vue')['default']
     IconChat: typeof import('./src/components/icon/IconChat.vue')['default']
     IconCss3: typeof import('./src/components/icon/IconCss3.vue')['default']
+    IconList: typeof import('./src/components/douyin/emoji/IconList.vue')['default']
     Zimu: typeof import('./src/components/douyin/zimu/index.vue')['default']
   }
 }

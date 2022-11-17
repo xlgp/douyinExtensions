@@ -1,6 +1,8 @@
 import { Ref } from "vue";
 
-export default (video: HTMLVideoElement, transformDisabled: Ref<boolean>) => {
+export default (transformDisabled: Ref<boolean>) => {
+
+  let video = document.getElementsByTagName("video")[0] as HTMLVideoElement;
 
   let clientRect = video.getBoundingClientRect();
   let videoStyleTransform = video.style.transform;

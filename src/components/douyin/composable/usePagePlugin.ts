@@ -20,7 +20,11 @@ export default () => {
     * 重新渲染视频直播区域
     * 主要删除上下无用的dom
     */
-    function togglePlayerView(liveElem: HTMLElement, toggle: boolean) {
+    function togglePlayerView(toggle: boolean) {
+        //获取直播区域
+        let liveElem = document.querySelector(
+            "[data-e2e='living-container']"
+        ) as HTMLElement;
         if (!liveElem) {
             return;
         }
@@ -79,16 +83,12 @@ export default () => {
     }
 
     function init() {
-        //获取直播区域
-        let liveElem = document.querySelector(
-            "[data-e2e='living-container']"
-        ) as HTMLElement;
         toggleOtherDom(false);
         toggleLivingPlayer();
         insertLiveRoomNicknameElem();
-        togglePlayerView(liveElem, false);
+        togglePlayerView(false);
     }
     setTimeout(() => {
         init();
-    }, 10);
+    }, 0);
 }

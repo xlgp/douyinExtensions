@@ -1,13 +1,4 @@
-type Style = {
-  [key: string]: string;
-};
-
-function isValidKey(
-  key: string | number | symbol,
-  object: object
-): key is keyof typeof object {
-  return key in object;
-}
+import { setElemStyle, Style } from "./useStyle";
 
 const zIndex = "10240";
 
@@ -18,20 +9,12 @@ function getDySideBar() {
   return document.getElementById("douyin-sidebar");
 }
 
-function setElemStyle(elem: HTMLElement) {
-  let style: Style = {
-    position: "fixed",
-    bottom: "8px",
-    right: "8px",
-    "z-index": zIndex,
-  };
-
-  Object.keys(style).forEach((key) => {
-    if (isValidKey(key, style)) {
-      elem!.style[key] = style[key];
-    }
-  });
-}
+let style: Style = {
+  position: "fixed",
+  bottom: "8px",
+  right: "8px",
+  "z-index": zIndex,
+};
 
 function createElement() {
   const MOUNT_EL_ID = "dy-ext-box";
@@ -48,7 +31,7 @@ function createElement() {
     sidebarElem.style.zIndex = zIndex;
     sidebarElem.appendChild(mountEl);
   } else {
-    setElemStyle(mountEl);
+    setElemStyle(mountEl, style);
     document.body.appendChild(mountEl);
   }
 

@@ -48,7 +48,6 @@ const props = defineProps({
   },
 });
 
-const video: HTMLVideoElement = (inject("video") as unknown) as HTMLVideoElement;
 const { disabled } = toRefs(props);
 
 const {
@@ -56,7 +55,7 @@ const {
   scaleSliderOptions,
   rotateSliderOptions,
   form,
-} = useOptions(video, disabled);
+} = useOptions(disabled);
 </script>
 <style scoped>
 :deep(.el-form-item) {
