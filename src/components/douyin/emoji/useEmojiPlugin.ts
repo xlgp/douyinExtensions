@@ -1,4 +1,5 @@
 import { setElemStyle } from "../../../content-scripts/useStyle";
+import useAutoInput, { AutoInputType } from "../composable/useAutoInput";
 
 export default (): HTMLElement => {
     let style = {
@@ -20,16 +21,20 @@ function getElem() {
     )[0] as HTMLTextAreaElement;
 }
 
-let textAreaElem = getElem();
+let textAreaElem: HTMLTextAreaElement;
+let autoInput: AutoInputType;
 
 export function insertEmojiToTextAreaElem(
     emojiText: string,
     focus: boolean = false
 ) {
-    textAreaElem = textAreaElem || getElem();
+    if (!textAreaElem) {
+        textAreaElem = getElem();
+        autoInput = useAutoInput(textAreaElem);
+    }
 
     if (emojiText && textAreaElem) {
-        textAreaElem.value += emojiText;
+        autoInput.fireInput(emojiText);
         if (focus) {
             setTimeout(() => {
                 textAreaElem.focus();
