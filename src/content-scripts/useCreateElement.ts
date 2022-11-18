@@ -16,16 +16,20 @@ let style: Style = {
   "z-index": zIndex,
 };
 
-function createElement() {
-  const MOUNT_EL_ID = "dy-ext-box";
-
-  let mountEl = document.getElementById(MOUNT_EL_ID);
+function createElement(id:string) {
+   let mountEl = document.getElementById(id);
   if (mountEl) {
     mountEl.remove();
   }
   mountEl = document.createElement("div");
-  mountEl.setAttribute("id", MOUNT_EL_ID);
+  mountEl.setAttribute("id", id);
 
+  return mountEl;
+}
+
+function createDyExtElement(){
+  const MOUNT_EL_ID = "dy-ext-box";
+  let mountEl = createElement(MOUNT_EL_ID);
   let sidebarElem = getDySideBar();
   if (sidebarElem) {
     sidebarElem.style.zIndex = zIndex;
@@ -34,8 +38,20 @@ function createElement() {
     setElemStyle(mountEl, style);
     document.body.appendChild(mountEl);
   }
-
   return mountEl;
 }
 
-export { createElement };
+function createZimuElement(){
+  const id = "dy-zimu-box";
+  const div = createElement(id);
+  let style:Style = {
+    display:"flex",
+    position:"fixed",
+    'z-index':zIndex
+  };
+  setElemStyle(div, style);
+  document.body.append(div);
+  return div;
+}
+
+export { createDyExtElement , createZimuElement};

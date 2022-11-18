@@ -2,7 +2,6 @@
   <div>
     <dy-video-css-dialog />
     <dy-chat />
-    <zimu />
   </div>
 </template>
 <script setup lang="ts">

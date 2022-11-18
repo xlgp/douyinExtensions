@@ -20,7 +20,7 @@ const { activeName, tabPaneList, tabsRef, height } = useZimu();
 <style scoped>
 .zimu-wrapper {
   position: fixed;
-  right: 100px;
+  right: 400px;
   top: 100px;
   width: 360px;
   transition: none;
