@@ -1,9 +1,9 @@
 <template>
-  <i class="emoji-icon">{{ name }}</i>
+  <i class="emoji-icon">{{ text }}</i>
 </template>
 <script setup lang="ts">
 defineProps({
-  name: String,
+  text: String,
 });
 </script>
 <style scoped>
@@ -12,13 +12,11 @@ defineProps({
   height: 24px;
   display: flex;
   background-size: contain;
-  margin-right: 4px;
   cursor: pointer;
-  color: #e8e8e9;
   margin: 4px;
-}
-
-i.emoji-icon:last-child {
-  margin-right: 0;
+  font-style: normal;
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
 }
 </style>

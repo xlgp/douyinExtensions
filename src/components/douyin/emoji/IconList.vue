@@ -1,28 +1,27 @@
 <template>
   <div class="box">
-    <Icon v-for="name in icons" :name="name" :key="name" @click="handleClick(name)" />
+    <Icon
+      v-for="icon in icons"
+      :text="icon.icon"
+      :key="icon.text"
+      @click="handleClick(icon)"
+    />
   </div>
 </template>
 <script setup lang="ts">
-type EmojiIconType = {
-  name: string;
-};
+import { EmojiType } from './data';
+import { insertEmojiToTextAreaElem } from './useEmojiPlugin';
 
 defineProps({
   icons: {
-    type: Array<string>,
+    type: Array<EmojiType>,
     reuqire: true,
-    default: [] as EmojiIconType[],
-  },
-  modelValue: {
-    type: String,
-  },
+    default: [] as EmojiType[],
+  }
 });
 
-const emit = defineEmits(["update:modelValue"]);
-
-const handleClick = (name: string) => {
-  emit("update:modelValue", name);
+const handleClick = (icon: EmojiType) => {
+  insertEmojiToTextAreaElem("[" + icon.text + "]", true);
 };
 </script>
 <style scoped>

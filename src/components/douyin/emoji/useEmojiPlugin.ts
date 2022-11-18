@@ -1,10 +1,10 @@
 import { setElemStyle } from "../../../content-scripts/useStyle";
 
-export default ():HTMLElement => {
+export default (): HTMLElement => {
     let style = {
         position: "absolute",
         right: "0",
-        bottom: "6px"
+        bottom: "2px"
     }
     let Elem = document.querySelector(".webcast-chatroom___items");
 
@@ -14,16 +14,22 @@ export default ():HTMLElement => {
     return div;
 }
 
+function getElem() {
+    return document.getElementsByClassName(
+        "webcast-chatroom___textarea"
+    )[0] as HTMLTextAreaElement;
+}
+
+let textAreaElem = getElem();
+
 export function insertEmojiToTextAreaElem(
     emojiText: string,
     focus: boolean = false
 ) {
-    let textAreaElem = document.getElementsByClassName(
-        "webcast-chatroom___textarea"
-    )[0] as HTMLTextAreaElement;
+    textAreaElem = textAreaElem || getElem();
 
     if (emojiText && textAreaElem) {
-        textAreaElem.value +=emojiText;
+        textAreaElem.value += emojiText;
         if (focus) {
             setTimeout(() => {
                 textAreaElem.focus();
