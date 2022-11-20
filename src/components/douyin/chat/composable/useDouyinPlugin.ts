@@ -63,7 +63,7 @@ export default () => {
   }
 
   function createChatRoomItem(elem: HTMLElement, itemId: string): ChatRoomItem {
-    let content = (elem.children[2] as HTMLElement).innerText;
+    let content = (elem.children[2] as HTMLElement).innerHTML;
     let nickname = getNickname(elem.children[1]);
     return {
       nickname,

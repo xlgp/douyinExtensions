@@ -4,7 +4,7 @@
     <div class="wrap">
       <div class="item">
         <div class="nickname">{{ showTime }} {{ nickname }}</div>
-        <div>{{ data.content }}</div>
+        <div v-html="data.content"></div>
       </div>
       <el-button plain class="btn" size="small" @click="handleReply">回复</el-button>
     </div>
