@@ -1,3 +1,5 @@
+import { setElemStyle, Style } from "../../../content-scripts/useStyle";
+
 export default () => {
 
     /**
@@ -53,6 +55,25 @@ export default () => {
         });
     }
 
+    function setAudienceElemStyle(elem: HTMLElement) {
+        let style: Style = {
+            'color': '#fff',
+            'vertical-align': 'bottom',
+            'display': 'inline-flex',
+            'justify-content': 'center',
+            'align-items': 'center',
+            'margin-left': '10px',
+        }
+        setElemStyle(elem, style);
+    }
+
+    function createUserDivElem() {
+        let elem = document.createElement("div");
+        elem.id = "ext-live-room-user";
+        elem.style.display = "flex";
+        return elem;
+    }
+
     /**
      * 重新调整直播用户名的位置
      * @returns 
@@ -62,24 +83,34 @@ export default () => {
         if (!nicknameElem) { return; }
         let avatarElem = nicknameElem.previousElementSibling as HTMLElement;
 
+        //观众
+        let audienceElem = document.querySelector('span[data-e2e="live-room-audience"]') as HTMLElement;
+        setAudienceElemStyle(audienceElem);
+
+        let userDivElem = createUserDivElem();
+
         let xgLeftGridElem = null;
         let xgLeftGridElemHieght = 0;
         try {
             xgLeftGridElem = document.getElementsByTagName("xg-controls")[0].getElementsByTagName("xg-left-grid")[0];
             xgLeftGridElemHieght = xgLeftGridElem.clientHeight;
+            xgLeftGridElem.appendChild(userDivElem);
+
         } catch (error) {
             console.error(error);
             return;
         }
         if (avatarElem) {
             avatarElem.style.marginTop = (xgLeftGridElemHieght - avatarElem.clientHeight) / 2 + "px";
-            xgLeftGridElem.append(avatarElem);
+            userDivElem.append(avatarElem);
         }
 
         nicknameElem.style.lineHeight = xgLeftGridElemHieght + "px";
         nicknameElem.style.color = "#fff";
         nicknameElem.style.marginLeft = "4px";
-        xgLeftGridElem.append(nicknameElem);
+        userDivElem.append(nicknameElem);
+
+        userDivElem.append(audienceElem);
     }
 
     function init() {
