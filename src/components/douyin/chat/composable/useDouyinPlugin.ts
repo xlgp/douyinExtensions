@@ -1,6 +1,11 @@
 import { ChatRoomItem } from "../constant";
 import { useChatStore } from "../store/Chat";
-import { getChatroomItem, getNickname, insertNicknameToTextAreaElem, isContainFilterField } from "./useChatUtil";
+import {
+  getChatroomItem,
+  getNickname,
+  insertNicknameToTextAreaElem,
+  isContainFilterField,
+} from "./useChatUtil";
 
 export default () => {
   const chatStore = useChatStore();
@@ -10,12 +15,11 @@ export default () => {
    * @param callback 获取昵称后回调函数
    */
   function addNicknameListener(callback: Function) {
-    
     let elem = document.getElementsByClassName("webcast-chatroom___items")[0];
     if (!elem) {
       return;
     }
-    elem.addEventListener("dblclick", function (e) {
+    elem.addEventListener("dblclick", function(e) {
       if (e.target instanceof HTMLElement) {
         let itemDom = getChatroomItem(e.target);
         if (itemDom) {
@@ -34,7 +38,7 @@ export default () => {
   function mutationObserver(filter: Function, callback: Function) {
     const config = { childList: true, subtree: true };
     // 当观察到变动时执行的回调函数
-    const observerCallback = function (mutationsList: MutationRecord[]) {
+    const observerCallback = function(mutationsList: MutationRecord[]) {
       for (let mutation of mutationsList) {
         let addedNodes = mutation.addedNodes;
         for (let i = 0; i < addedNodes.length; i++) {
@@ -79,7 +83,6 @@ export default () => {
 
   function init() {
     try {
-
       addNicknameListener((nickname: string) =>
         insertNicknameToTextAreaElem(nickname, true)
       );
@@ -101,5 +104,7 @@ export default () => {
     }
   }
 
-  init();
+  setTimeout(() => {
+    init();
+  }, 1000);
 };
