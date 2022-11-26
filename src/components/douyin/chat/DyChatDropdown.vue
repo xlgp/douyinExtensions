@@ -21,9 +21,6 @@ const emit = defineEmits(['reply'])
 const { replyList } = useChatStore();
 const btnText = ref("回复");
 
-const handleClick = () => {
-    console.log('button click')
-}
 const handleCommand = (command: string) => {
     emit("reply", command);
 }
