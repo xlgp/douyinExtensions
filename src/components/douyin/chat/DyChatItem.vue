@@ -6,7 +6,7 @@
         <div class="nickname">{{ showTime }} {{ nickname }}</div>
         <div v-html="data.content"></div>
       </div>
-      <dy-chat-dropdown @reply="handleReply" />
+      <dy-chat-dropdown @reply="handleReply" class="item-dropdown" />
     </div>
   </div>
 </template>
@@ -72,5 +72,9 @@ const handleReply = (value: string | null) => {
 .item {
   flex: auto;
   display: grid;
+}
+.item-dropdown {
+  flex: none;
+  margin-left: 6px;
 }
 </style>

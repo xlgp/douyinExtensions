@@ -11,7 +11,9 @@ export default () => {
       return;
     }
     chatStore.filterChatItems.push({
-      content: "内容......." + len,
+      content:
+        "刚才抢到红包啦内容.......,本曲出自黄梅戏《蓝桥汲水》选段：杉木水桶辛郎儿唆 " +
+        len,
       nickname: "昵称" + len,
       itemId: new Date().getTime() + "",
       createdAt: new Date(),

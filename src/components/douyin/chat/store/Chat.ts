@@ -22,7 +22,13 @@ export const useChatStore = defineStore("dyChatStore", () => {
     filterChatItems.value.map((item) => item.itemId)
   );
 
-  const replyList = reactive(["晚上好", "兄台好", "早上好", "中午好"]);
+  const replyList = reactive([
+    "晚上好",
+    "兄台好",
+    "早上好",
+    "中午好",
+    "下午好",
+  ]);
 
   function setFilterChatItems(item: ChatRoomItem) {
     filterChatItems.value.push(item);
