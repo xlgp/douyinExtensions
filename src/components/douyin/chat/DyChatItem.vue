@@ -6,12 +6,13 @@
         <div class="nickname">{{ showTime }} {{ nickname }}</div>
         <div v-html="data.content"></div>
       </div>
-      <el-button plain class="btn" size="small" @click="handleReply">回复</el-button>
+      <dy-chat-dropdown @reply="handleReply" />
     </div>
   </div>
 </template>
 <script lang="ts" setup>
 import { insertNicknameToTextAreaElem } from "./composable/useChatUtil";
+import { sendReply } from "./composable/useTextareaPlugin";
 import { chatProvideKey, ChatProvideType } from "./constant";
 
 const { close } = inject<ChatProvideType>(chatProvideKey, {} as ChatProvideType);
@@ -41,9 +42,13 @@ const showTime = computed(() => {
   );
 });
 
-const handleReply = () => {
+const handleReply = (value: string | null) => {
   close();
-  insertNicknameToTextAreaElem(data.value.nickname, true);
+  if (value) {
+    sendReply(data.value.nickname + " " + value);
+  } else {
+    insertNicknameToTextAreaElem(data.value.nickname, true);
+  }
 };
 </script>
 <style scoped>
@@ -67,10 +72,5 @@ const handleReply = () => {
 .item {
   flex: auto;
   display: grid;
-}
-.btn {
-  background-color: #1617221f;
-  color: var(--el-color-info-light-5);
-  margin-left: 6px;
 }
 </style>
