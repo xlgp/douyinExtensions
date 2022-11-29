@@ -1,8 +1,8 @@
 import { ChangCiType, ChangDuanDetailType, ChangDuanType } from "../data";
 
 export default () => {
-  const getChangDuanDetail = (): ChangDuanDetailType => {
-      const data = {
+  const getChangDuanDetailList = (): ChangDuanDetailType[] => {
+      const data = [{
         id: 1,
         name: "春风送暖到襄阳",
         originName: "春风送暖到襄阳",
@@ -10,8 +10,14 @@ export default () => {
         juMu: "女驸马",
         originJuMu: "女驸马",
         offset: -10,
-      };
-    return data as ChangDuanDetailType;
+      },
+      {id:1,juZhong:"黄梅戏",name:"爱歌（回头一笑百媚生）", originName:"爱歌（回头一笑百媚生）", offset:-10, juMu:"", originJuMu:""},
+{id:1,juZhong:"黄梅戏",name:"爱歌（你变那长安钟楼万寿钟）－春香传", originName:"爱歌（你变那长安钟楼万寿钟）－春香传", offset:-10, juMu:"", originJuMu:""},
+{id:1,juZhong:"黄梅戏",name:"百花赠剑-溶溶月色照梅亭（杨舒星版）", originName:"百花赠剑-溶溶月色照梅亭（杨舒星版）", offset:-10, juMu:"", originJuMu:""},
+{id:1,juZhong:"黄梅戏",name:"扮皇帝－游龙戏凤", originName:"扮皇帝－游龙戏凤", offset:-10, juMu:"", originJuMu:""},
+{id:1,juZhong:"黄梅戏",name:"别洞观景", originName:"别洞观景", offset:-10, juMu:"", originJuMu:""},
+{id:1,juZhong:"黄梅戏",name:"补背褡", originName:"补背褡", offset:-10, juMu:"", originJuMu:""}];
+    return data as ChangDuanDetailType[];
   };
   const getChangCiList = (): ChangCiType[] => {
     return [
@@ -126,13 +132,13 @@ export default () => {
 
   function getChangDuan(){
     return{
-      detail:getChangDuanDetail(),
+      detail:getChangDuanDetailList()[0],
       changCiList:getChangCiList()
     }as ChangDuanType;
   }
 
   return {
-    getChangDuanDetail,
+    getChangDuanDetailList,
     getChangCiList,
     getChangDuan
   };

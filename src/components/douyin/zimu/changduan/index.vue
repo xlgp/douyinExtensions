@@ -4,7 +4,7 @@
 <script setup lang="ts">
 import useInitData from "../composable/useInitData";
 import { ChangDuanDetailType } from "../data.d";
-const { getChangDuanDetail } = useInitData();
+const { getChangDuanDetailList } = useInitData();
 
-const datalist: ChangDuanDetailType[] = reactive([getChangDuanDetail()]);
+const datalist: ChangDuanDetailType[] = reactive(getChangDuanDetailList());
 </script>
