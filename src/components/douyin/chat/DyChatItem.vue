@@ -45,9 +45,9 @@ const showTime = computed(() => {
 const handleReply = (value: string | null) => {
   close();
   if (value) {
-    sendReply(nickname.value + " " + value);
+    sendReply("@" + data.value.nickname + " " + value);
   } else {
-    insertNicknameToTextAreaElem(nickname.value, true);
+    insertNicknameToTextAreaElem(data.value.nickname, true);
   }
 };
 </script>
