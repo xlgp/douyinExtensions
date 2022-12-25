@@ -55,18 +55,6 @@ export default () => {
         });
     }
 
-    function setAudienceElemStyle(elem: HTMLElement) {
-        let style: Style = {
-            'color': '#fff',
-            'vertical-align': 'bottom',
-            'display': 'inline-flex',
-            'justify-content': 'center',
-            'align-items': 'center',
-            'margin-left': '10px',
-        }
-        setElemStyle(elem, style);
-    }
-
     function createUserDivElem() {
         let elem = document.createElement("div");
         elem.id = "ext-live-room-user";
@@ -82,10 +70,6 @@ export default () => {
         let nicknameElem = document.querySelector('[data-e2e="live-room-nickname"]') as HTMLElement;
         if (!nicknameElem) { return; }
         let avatarElem = nicknameElem.previousElementSibling as HTMLElement;
-
-        //观众
-        let audienceElem = document.querySelector('span[data-e2e="live-room-audience"]') as HTMLElement;
-        setAudienceElemStyle(audienceElem);
 
         let userDivElem = createUserDivElem();
 
@@ -109,8 +93,6 @@ export default () => {
         nicknameElem.style.color = "#fff";
         nicknameElem.style.marginLeft = "4px";
         userDivElem.append(nicknameElem);
-
-        userDivElem.append(audienceElem);
     }
 
     function init() {
@@ -119,7 +101,5 @@ export default () => {
         insertLiveRoomNicknameElem();
         togglePlayerView(false);
     }
-    setTimeout(() => {
-        init();
-    }, 0);
+    setTimeout(init, 0);
 }

@@ -7,6 +7,4 @@ let EmojiApp:App<Element> = undefined as unknown as App;
 window.addEventListener('load', () => {
   app = createVueApp();
   EmojiApp = createEmojiVueApp();
-  //字幕组件
-  // ZimuApp = createZimuVueApp();
 });
