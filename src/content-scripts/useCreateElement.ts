@@ -54,4 +54,23 @@ function createZimuElement(){
   return div;
 }
 
-export { createDyExtElement , createZimuElement};
+function createTimeElement(){
+  const id = "dy-time-box";
+  const div = createElement(id);
+  let style:Style = {
+    display:"flex",
+    position:"absolute",
+    bottom:"0px",
+    right:"16px",
+    'z-index':zIndex,
+    color: 'var(--color-text-2)',
+    'font-size': 'small',
+  };
+  let Elem = document.querySelector(".webcast-chatroom");
+  setElemStyle(div, style);
+  
+  Elem?.append(div);
+  return div;
+}
+
+export { createDyExtElement , createZimuElement, createTimeElement};

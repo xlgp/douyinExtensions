@@ -1,10 +1,12 @@
 import { App } from 'vue';
-import { createEmojiVueApp, createVueApp } from './useVue';
+import { createEmojiVueApp, createDyExVueApp, createTimeVueApp } from './useVue';
 
 let app: App<Element> = undefined as unknown as App;
-let EmojiApp:App<Element> = undefined as unknown as App;
+let emojiApp:App<Element> = undefined as unknown as App;
+let timeApp:App<Element> = undefined as unknown as App;
 
 window.addEventListener('load', () => {
-  app = createVueApp();
-  EmojiApp = createEmojiVueApp();
+  app = createDyExVueApp();
+  emojiApp = createEmojiVueApp();
+  timeApp = createTimeVueApp();
 });

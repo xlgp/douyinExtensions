@@ -1,40 +1,40 @@
-import { App, createApp } from "vue";
+import { App, Component, createApp } from "vue";
 import DouyinComponent from '../components/douyin/index.vue'
-import { createDyExtElement, createZimuElement } from './useCreateElement'
-import { createPinia } from 'pinia'
+import { createDyExtElement, createTimeElement, createZimuElement } from './useCreateElement'
+import { createPinia, Pinia } from 'pinia'
 import useEmojiPlugin from "../components/douyin/emoji/useEmojiPlugin";
 import EmojiComponent from "../components/douyin/emoji/index.vue"
 import ZimuComponent from "../components/douyin/zimu/index.vue"
+import TimeComponent from "../components/douyin/time/index.vue"
 
 let pinia = createPinia();
 
-function createVueApp() {
-    const mountEl = createDyExtElement();
-    const app: App<Element> = createApp(DouyinComponent);
-    app.use(pinia);
+function createVueApp(mountEl:HTMLElement, component:Component, pinia?:Pinia){
+    const app: App<Element> = createApp(component);
+    pinia && app.use(pinia);
     app.mount(mountEl);
     return app;
 }
 
+function createDyExVueApp() {
+    return createVueApp(createDyExtElement(), DouyinComponent, pinia);
+}
+
 function createEmojiVueApp(){
-    const el = useEmojiPlugin();
-    const app: App<Element> = createApp(EmojiComponent);
-    app.use(pinia);
-    app.mount(el);
-    return app;
+    return createVueApp(useEmojiPlugin(), EmojiComponent, pinia);
 }
 
 function createZimuVueApp(){
-    const el = createZimuElement();
-    const app: App<Element> = createApp(ZimuComponent);
-    app.use(pinia);
-    app.mount(el);
-    return app;
+    return createVueApp(createZimuElement(), ZimuComponent, pinia);
 }
 
+function createTimeVueApp(){
+    return createVueApp(createTimeElement(), TimeComponent, pinia);
+}
 
 export {
-    createVueApp,
+    createDyExVueApp,
     createEmojiVueApp,
-    createZimuVueApp
+    createZimuVueApp,
+    createTimeVueApp
 }
