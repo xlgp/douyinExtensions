@@ -1,3 +1,5 @@
+import { storageSeparator } from "../constant";
+
 //过滤
 let filterClassList = [
   "webcast-chatroom__room-message",
@@ -71,7 +73,7 @@ export function insertNicknameToTextAreaElem(
 }
 
 export function parseLocalFilterField(value: string) {
-  let list = value.trim().split(",");
+  let list = value.trim().split(storageSeparator);
   if (!list) return [];
   return list
     .filter((value: string) => value && value.trim())

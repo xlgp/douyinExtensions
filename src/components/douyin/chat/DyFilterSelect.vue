@@ -60,11 +60,11 @@ watch(
 .dy-filter-select-popper .el-select-dropdown.is-multiple .el-select-dropdown__item.hover {
   background-color: #0e0e1c26;
 }
-.dy-filter-select-popper.el-select__popper {
+.dy-filter-select-popper.el-select__popper[role="tooltip"] {
   background-color: #161722f7;
   border-color: #262626;
 }
-.dy-filter-select-popper.el-popper .el-popper__arrow::before {
+.dy-filter-select-popper.el-popper[role="tooltip"] .el-popper__arrow::before {
   border-color: #262626;
   background-color: #161722f7;
 }

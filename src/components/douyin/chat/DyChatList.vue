@@ -1,7 +1,7 @@
 <template>
   <div class="tips-wrap">
     <span>共有 {{ items.length }} 项</span>
-    <el-button @click="handleClear" text plain size="small" type="danger">清空</el-button>
+    <el-button @click="handleClear" text size="small" type="danger">清空</el-button>
   </div>
   <el-scrollbar ref="scrollbarRef" height="300px">
     <DyChatItem
@@ -26,7 +26,7 @@ const showTips = (index: number) => {
 };
 
 const handleChildMounted = () => {
-  let scrollHeight = scrollbarRef.value.wrap$.scrollHeight;
+  let scrollHeight = scrollbarRef.value.wrapRef.scrollHeight;
   scrollbarRef.value.setScrollTop(scrollHeight);
 };
 
@@ -71,6 +71,5 @@ const handleClear = () => {
 .tips-wrap .el-button.is-text:not(.is-disabled):hover {
   background-color: #f5c0c052;
   color: #fff;
-  outline: 1px solid #f5c0c0d6;
 }
 </style>

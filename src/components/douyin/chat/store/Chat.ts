@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
-import { getLocalFilterField } from "../../composable/useStorage";
+import { getFromStorage, getLocalFilterField } from "../../composable/useStorage";
 import { parseLocalFilterField } from "../composable/useChatUtil";
-import { ChatRoomItem, filterFieldKey } from "../constant";
+import { ChatRoomItem, filterFieldKey, replyTagKey, storageSeparator } from "../constant";
 
 export const useChatStore = defineStore("dyChatStore", () => {
   const filterFieldList = ref(parseLocalFilterField(getLocalFilterField()));
@@ -22,13 +22,7 @@ export const useChatStore = defineStore("dyChatStore", () => {
     filterChatItems.value.map((item) => item.itemId)
   );
 
-  const replyList = reactive([
-    "晚上好",
-    "兄台好",
-    "早上好",
-    "中午好",
-    "下午好",
-  ]);
+  const replyList = ref(getFromStorage() || []);
 
   function setFilterChatItems(item: ChatRoomItem) {
     filterChatItems.value.push(item);
@@ -39,7 +33,7 @@ export const useChatStore = defineStore("dyChatStore", () => {
   }
 
   function saveFilterFieldList() {
-    localStorage.setItem(filterFieldKey, filterFieldList.value.join(","));
+    localStorage.setItem(filterFieldKey, filterFieldList.value.join(storageSeparator));
   }
 
   function setLastVisitDyChatTime() {
@@ -65,6 +59,12 @@ export const useChatStore = defineStore("dyChatStore", () => {
     return count;
   });
 
+  const saveToStorage = () => {
+    window.localStorage.setItem(replyTagKey, replyList.value.join(storageSeparator));
+  }
+
+  const updateReplyList = ()=>{}
+
   return {
     filterFieldList,
     filterChatItemIds,
@@ -77,5 +77,6 @@ export const useChatStore = defineStore("dyChatStore", () => {
     clearFilterChatItems,
     saveFilterFieldList,
     replyList,
+    saveReplyList: saveToStorage
   };
 });

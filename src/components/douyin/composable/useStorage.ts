@@ -1,4 +1,4 @@
-import { filterFieldKey, filterFieldDefaultValue } from "../chat/constant";
+import { filterFieldKey, filterFieldDefaultValue, replyTagKey, storageSeparator } from "../chat/constant";
 
 export function getLocalFilterField() {
   let value = localStorage.getItem(filterFieldKey);
@@ -7,4 +7,13 @@ export function getLocalFilterField() {
     value = filterFieldDefaultValue;
   }
   return value;
+}
+
+export const getFromStorage = () => {
+  try {
+    return window.localStorage.getItem(replyTagKey)?.split(storageSeparator);
+  } catch (error) {
+    console.error(error);
+  }
+  return [];
 }
