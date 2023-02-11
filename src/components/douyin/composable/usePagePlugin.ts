@@ -1,5 +1,3 @@
-import { setElemStyle, Style } from "../../../content-scripts/useStyle";
-
 export default () => {
 
     /**
@@ -18,27 +16,38 @@ export default () => {
             (toggle && "block") || "none";
     }
 
+    function toggleDom(el: HTMLElement, toggle: boolean) {
+        el && (el.style.display = (toggle && "block") || "none");
+    }
+
     /**
     * 重新渲染视频直播区域
     * 主要删除上下无用的dom
     */
     function togglePlayerView(toggle: boolean) {
-        //获取直播区域
-        let liveElem = document.querySelector(
+        //获取大直播区域（直播区域+评论区域）
+        let livingContainer = document.querySelector(
             "[data-e2e='living-container']"
         ) as HTMLElement;
-        if (!liveElem) {
+        if (!livingContainer) {
             return;
         }
-        //删除上部分
-        let firstElem = liveElem.firstElementChild
-            ?.firstElementChild as HTMLElement;
-        let lastElem = liveElem.firstElementChild?.lastElementChild as HTMLElement;
-        let nextElem = liveElem.nextElementSibling as HTMLElement;
 
-        firstElem && (firstElem.style.display = (toggle && "block") || "none");
-        lastElem && (lastElem.style.display = (toggle && "block") || "none");
-        nextElem && (nextElem.style.display = (toggle && "block") || "none");
+        //相关直播区域（直播大区域以下部分）
+        toggleDom(livingContainer.nextElementSibling as HTMLElement, toggle);
+
+        //直播区域
+        let liveElem = livingContainer.firstElementChild;
+
+        //主播名称区域
+        toggleDom(liveElem?.firstElementChild as HTMLElement, toggle);
+
+        /**
+         * 直播区域下若有礼物区域
+         */
+        if (liveElem?.children.length == 3) {
+            toggleDom(liveElem?.lastElementChild as HTMLElement, toggle);
+        }
     }
 
     /**

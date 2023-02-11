@@ -22,35 +22,39 @@ export default defineConfig({
       input: "src/manifest.json"
     }
   },
-  plugins: [vue(), chromeExtension(),
-  createStyleImportPlugin({
-    resolves: [ElementPlusResolve()],
-    libs: [
-      {
-        libraryName: "element-plus",
-        esModule: true,
-        resolveStyle: (name: string) => {
-          return `element-plus/theme-chalk/${name}.css`;
+  plugins: [
+    vue(),
+    chromeExtension(),
+    createStyleImportPlugin({
+      resolves: [ElementPlusResolve()],
+      libs: [
+        {
+          libraryName: "element-plus",
+          esModule: true,
+          resolveStyle: (name: string) => {
+            return `element-plus/theme-chalk/${name}.css`;
+          },
         },
-      },
-    ],
-  }),
-  AutoImport({
-    include: [
-      /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
-      /\.vue$/,
-      /\.vue\?vue/, // .vue
-      /\.md$/, // .md
-    ],
-    resolvers: [ElementPlusResolver()],
-    imports: [
-      'vue',
-      'pinia'
-    ],
-  }),
-  Components({
-    resolvers: [ElementPlusResolver()],
-  }),
+      ],
+    }),
+    AutoImport({
+      include: [
+        /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+        /\.vue$/,
+        /\.vue\?vue/, // .vue
+        /\.md$/, // .md
+      ],
+      resolvers: [ElementPlusResolver()],
+      imports: [
+        'vue',
+        'pinia'
+      ],
+    }),
+    Components({
+      dts: true,
+      dirs: ['src/components', 'src/views'],
+      resolvers: [ElementPlusResolver()],
+    }),
   ]
 })
 
