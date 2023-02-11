@@ -63,8 +63,6 @@ export const useChatStore = defineStore("dyChatStore", () => {
     window.localStorage.setItem(replyTagKey, replyList.value.join(storageSeparator));
   }
 
-  const updateReplyList = ()=>{}
-
   return {
     filterFieldList,
     filterChatItemIds,
