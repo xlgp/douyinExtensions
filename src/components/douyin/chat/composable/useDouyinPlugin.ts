@@ -44,7 +44,7 @@ export default () => {
         for (let i = 0; i < addedNodes.length; i++) {
           const node = addedNodes[i] as HTMLElement;
           let item = node.childNodes[0] as HTMLElement;
-          if (item.classList.contains("webcast-chatroom__room-message")) {
+          if (!item || item.classList.contains("webcast-chatroom__room-message")) {
             continue;
           }
           if (filter(item.children[2], node.dataset.id)) {
