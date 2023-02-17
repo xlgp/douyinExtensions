@@ -110,5 +110,5 @@ export default () => {
         insertLiveRoomNicknameElem();
         togglePlayerView(false);
     }
-    setTimeout(init, 600);
+    setTimeout(init, 20);
 }
