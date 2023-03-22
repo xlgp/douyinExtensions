@@ -18,6 +18,7 @@ declare module '@vue/runtime-core' {
     DyChatList: typeof import('./src/components/douyin/chat/DyChatList.vue')['default']
     DyConfig: typeof import('./src/components/douyin/chat/DyConfig.vue')['default']
     DyFilterSelect: typeof import('./src/components/douyin/chat/DyFilterSelect.vue')['default']
+    Dymenu: typeof import('./src/components/douyin/dymenu/index.vue')['default']
     DyReply: typeof import('./src/components/douyin/chat/DyReply.vue')['default']
     DyVideoCssDialog: typeof import('./src/components/douyin/video/DyVideoCssDialog.vue')['default']
     DyVideoForm: typeof import('./src/components/douyin/video/DyVideoForm.vue')['default']
@@ -45,6 +46,7 @@ declare module '@vue/runtime-core' {
     IconChat: typeof import('./src/components/icon/IconChat.vue')['default']
     IconCss3: typeof import('./src/components/icon/IconCss3.vue')['default']
     IconList: typeof import('./src/components/douyin/emoji/IconList.vue')['default']
+    IconMenu: typeof import('./src/components/icon/IconMenu.vue')['default']
     Time: typeof import('./src/components/douyin/time/index.vue')['default']
     Zimu: typeof import('./src/components/douyin/zimu/index.vue')['default']
   }

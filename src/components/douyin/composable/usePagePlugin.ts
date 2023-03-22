@@ -5,17 +5,15 @@ export default () => {
      * @param toggle
      */
     function toggleOtherDom(toggle: boolean) {
-        //隐藏其他区域
-        let elem = document.getElementById("_douyin_live_scroll_container_")
-            ?.previousElementSibling as HTMLElement;
-        if (elem) {
-            elem.style.display = (toggle && "block") || "none";
-        }
         //隐藏footer
-        document.getElementsByTagName("footer")[0].style.display =
-            (toggle && "block") || "none";
+        toggleDom(document.getElementsByTagName("footer")[0], toggle);
     }
 
+    /**
+     * 切换el显示与隐藏
+     * @param el HTMLElement
+     * @param toggle boolean toggle 为 true ,el display 为 block,否则为none
+     */
     function toggleDom(el: HTMLElement, toggle: boolean) {
         el && (el.style.display = (toggle && "block") || "none");
     }
@@ -58,9 +56,8 @@ export default () => {
             "video"
         )[0] as HTMLVideoElement;
         let playerElem = document.getElementsByClassName("living_player")[0] as HTMLElement;
-        playerElem.addEventListener("dblclick", e => {
-            let display = videoElem.style.display || "block";
-            videoElem.style.display = (display == "none" && "block") || "none";
+        playerElem.addEventListener("dblclick", () => {
+            toggleDom(videoElem, videoElem.style.display == "none");
         });
     }
 
@@ -105,10 +102,13 @@ export default () => {
     }
 
     function init() {
-        toggleOtherDom(false);
         toggleLivingPlayer();
         insertLiveRoomNicknameElem();
-        togglePlayerView(false);
     }
-    setTimeout(init, 20);
+
+    function toggle(toggle: boolean) {
+        toggleOtherDom(toggle);
+        togglePlayerView(toggle);
+    }
+    return { toggle, init }
 }
