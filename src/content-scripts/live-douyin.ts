@@ -8,7 +8,8 @@ let timeApp: App<Element> = undefined as unknown as App;
 window.addEventListener('load', () => {
   setTimeout(() => {
     app = createDyExVueApp();
-    emojiApp = createEmojiVueApp();
     timeApp = createTimeVueApp();
-  }, 2000);
+    emojiApp = createEmojiVueApp();
+  }, 5000);
+
 });
