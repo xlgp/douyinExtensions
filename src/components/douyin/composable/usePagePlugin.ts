@@ -7,6 +7,8 @@ export default () => {
     function toggleOtherDom(toggle: boolean) {
         //隐藏footer
         toggleDom(document.getElementsByTagName("footer")[0], toggle);
+        //隐藏header 下的导航条
+        toggleDom(document.getElementById("_douyin_live_scroll_container_")?.previousElementSibling, toggle);
     }
 
     /**
