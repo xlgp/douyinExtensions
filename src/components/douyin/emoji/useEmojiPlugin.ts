@@ -3,13 +3,14 @@ import { setElemStyle } from "../../../content-scripts/useStyle";
 export default (): HTMLElement => {
   let style = {
     position: "absolute",
-    right: "0",
-    bottom: "2px",
+    right: "16px",
+    bottom: "68px",
   };
-  let Elem = document.querySelector(".webcast-chatroom___items");
+  let Elem = document.querySelector(".webcast-chatroom");
 
   let div = document.createElement("div");
   setElemStyle(div, style);
   Elem?.append(div);
+  console.log(Elem);
   return div;
 };
