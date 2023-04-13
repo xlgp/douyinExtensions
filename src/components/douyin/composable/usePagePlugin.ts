@@ -8,7 +8,7 @@ export default () => {
         //隐藏footer
         toggleDom(document.getElementsByTagName("footer")[0], toggle);
         //隐藏header 下的导航条
-        toggleDom(document.getElementById("_douyin_live_scroll_container_")?.previousElementSibling, toggle);
+        toggleDom(document.getElementById("_douyin_live_scroll_container_")?.previousElementSibling as HTMLElement, toggle);
     }
 
     /**
@@ -16,7 +16,7 @@ export default () => {
      * @param el HTMLElement
      * @param toggle boolean toggle 为 true ,el display 为 block,否则为none
      */
-    function toggleDom(el: HTMLElement, toggle: boolean) {
+    function toggleDom(el: HTMLElement | null | undefined, toggle: boolean) {
         el && (el.style.display = (toggle && "block") || "none");
     }
 
