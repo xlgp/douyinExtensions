@@ -11,6 +11,5 @@ export default (): HTMLElement => {
   let div = document.createElement("div");
   setElemStyle(div, style);
   Elem?.append(div);
-  console.log(Elem);
   return div;
 };
