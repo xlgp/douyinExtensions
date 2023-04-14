@@ -20,6 +20,13 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: "src/manifest.json"
+    },
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
     }
   },
   plugins: [
