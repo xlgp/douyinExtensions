@@ -61,6 +61,7 @@ export default () => {
     let targetNode = document.getElementsByClassName(
       "webcast-chatroom___items"
     )[0].firstChild;
+    
     if (targetNode) {
       observer.observe(targetNode, config);
     }
@@ -104,7 +105,5 @@ export default () => {
     }
   }
 
-  setTimeout(() => {
-    init();
-  }, 1000);
+  init();
 };

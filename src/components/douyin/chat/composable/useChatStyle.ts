@@ -41,8 +41,6 @@ export default () => {
         limitElem.style.zIndex = "1";
     }
 
-    setTimeout(() => {
-        renderChatroomInputContainer();
-    }, 1000);
+    renderChatroomInputContainer();
 
 }
