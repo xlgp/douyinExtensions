@@ -11,7 +11,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { insertNicknameToTextAreaElem } from "./composable/useChatUtil";
+import { getAtNickname, insertNicknameToTextAreaElem } from "./composable/useChatUtil";
 import { sendReply } from "./composable/useTextareaPlugin";
 import { chatProvideKey, ChatProvideType } from "./constant";
 
@@ -45,7 +45,7 @@ const showTime = computed(() => {
 const handleReply = (value: string | null) => {
   close();
   if (value) {
-    sendReply("@" + data.value.nickname + " " + value);
+    sendReply(getAtNickname(data.value.nickname) + value);
   } else {
     insertNicknameToTextAreaElem(data.value.nickname, true);
   }
