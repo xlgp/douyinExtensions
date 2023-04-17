@@ -1,10 +1,14 @@
 import { defineStore } from "pinia";
 import { getFromStorage, getLocalFilterField } from "../../composable/useStorage";
-import { parseLocalFilterField } from "../composable/useChatUtil";
-import { ChatRoomItem, filterFieldKey, replyTagKey, storageSeparator } from "../constant";
+import { getAtNickname, parseLocalFilterField } from "../composable/useChatUtil";
+import { sendReply } from "../composable/useTextareaPlugin";
+import { autoReplyContentList, ChatRoomItem, filterFieldKey, originalContentReplyValue, replyTagKey, storageSeparator } from "../constant";
 
 export const useChatStore = defineStore("dyChatStore", () => {
+
   const filterFieldList = ref(parseLocalFilterField(getLocalFilterField()));
+
+  const isAutoReply = ref(true);
 
   /**
    * 最新一次查看面板的时间
@@ -26,6 +30,8 @@ export const useChatStore = defineStore("dyChatStore", () => {
 
   function setFilterChatItems(item: ChatRoomItem) {
     filterChatItems.value.push(item);
+    //自动回复
+    autoReply(item);
   }
 
   function clearFilterChatItems() {
@@ -42,6 +48,32 @@ export const useChatStore = defineStore("dyChatStore", () => {
 
   function isRead(item: ChatRoomItem) {
     return item.createdAt.getTime() <= lastVisitDyChatTime.value;
+  }
+
+  function autoReply(item: ChatRoomItem) {
+    let replyContent = getAutoReplyContent(item.content);
+    if (isAutoReply.value && replyContent) {
+      sendReply(getAtNickname(item.nickname) + replyContent);
+    }
+  }
+
+  function getAutoReplyContent(content: string): String {
+    let result = "";
+    for (let i = 0; i < autoReplyContentList.length; i++) {
+      let item = autoReplyContentList[i];
+
+      let m = content.match(new RegExp(item.key));
+      if (m) {
+        if (item.value === originalContentReplyValue) {
+          result = m[0];
+        } else {
+          result = item.value;
+        }
+        break;
+      }
+    }
+
+    return result;
   }
 
   const unreadChatItemCount = computed(() => {
@@ -75,6 +107,8 @@ export const useChatStore = defineStore("dyChatStore", () => {
     clearFilterChatItems,
     saveFilterFieldList,
     replyList,
+    isAutoReply,
+    getAutoReplyContent,
     saveReplyList: saveToStorage
   };
 });
