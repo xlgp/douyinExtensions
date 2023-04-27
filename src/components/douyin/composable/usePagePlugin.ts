@@ -14,10 +14,10 @@ export default () => {
     /**
      * 切换el显示与隐藏
      * @param el HTMLElement
-     * @param toggle boolean toggle 为 true ,el display 为 block,否则为none
+     * @param toggle boolean toggle 为 true ,el display 为 flex,否则为none
      */
     function toggleDom(el: HTMLElement | null | undefined, toggle: boolean) {
-        el && (el.style.display = (toggle && "block") || "none");
+        el && (el.style.display = (toggle && "flex") || "none");
     }
 
     /**
