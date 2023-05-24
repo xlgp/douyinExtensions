@@ -9,17 +9,20 @@
       v-for="(item, index) in items"
       :data="item"
     >
-      <div v-if="showTips(index)" class="tips">最新信息</div>
+      <template #header><div v-if="showTips(index)" class="tips">最新信息</div></template>
+      <DyAutoReplyList :data="autoReplyChatItems[item.itemId]" />
     </DyChatItem>
   </el-scrollbar>
 </template>
 <script setup lang="ts">
+import DyAutoReplyList from "./DyAutoReplyList.vue";
 import { useChatStore } from "./store/Chat";
 
 const scrollbarRef = ref();
 
 const chatStore = useChatStore();
 const items = chatStore.filterChatItems;
+const autoReplyChatItems = chatStore.autoReplyChatItems;
 
 const showTips = (index: number) => {
   return chatStore.lastUnReadDyChatIndex == index;

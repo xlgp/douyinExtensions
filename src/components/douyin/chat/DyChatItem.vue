@@ -1,16 +1,20 @@
 <template>
   <div>
-    <slot></slot>
-    <div class="wrap">
-      <div class="item">
-        <div class="nickname">{{ showTime }} {{ nickname }}</div>
-        <div v-html="data.content"></div>
+    <slot name="header"></slot>
+    <div class="box">
+      <div class="wrap">
+        <div class="item">
+          <div class="nickname">{{ showTime }} {{ nickname }}</div>
+          <div v-html="data.content"></div>
+        </div>
+        <dy-chat-dropdown @reply="handleReply" class="item-dropdown" />
       </div>
-      <dy-chat-dropdown @reply="handleReply" class="item-dropdown" />
+      <slot></slot>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
+import { formatDate } from "../../../utils";
 import { getAtNickname, insertNicknameToTextAreaElem } from "./composable/useChatUtil";
 import { sendReply } from "./composable/useTextareaPlugin";
 import { chatProvideKey, ChatProvideType } from "./constant";
@@ -28,19 +32,7 @@ const nickname = computed(() => {
   return "@" + data.value.nickname + ":";
 });
 
-const showTime = computed(() => {
-  let date: Date = data.value.createdAt;
-  let h = date.getHours();
-  let m = date.getMinutes();
-  let s = date.getSeconds();
-  return (
-    ((h < 10 && "0" + h) || h) +
-    ":" +
-    ((m < 10 && "0" + m) || m) +
-    ":" +
-    ((s < 10 && "0" + s) || s)
-  );
-});
+const showTime = computed(() => formatDate(data.value.createdAt));
 
 const handleReply = (value: string | null) => {
   close();
@@ -52,15 +44,17 @@ const handleReply = (value: string | null) => {
 };
 </script>
 <style scoped>
-.wrap {
-  display: flex;
+.box {
   padding: 6px;
   border-radius: 4px;
   border: 1px solid var(--el-text-color-regular);
   margin-bottom: 6px;
   color: #e5e5e5;
-  align-items: center;
   background-color: #60626626;
+}
+.wrap {
+  display: flex;
+  align-items: center;
 }
 .nickname {
   color: var(--el-color-info-light-5);

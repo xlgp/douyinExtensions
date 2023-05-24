@@ -10,13 +10,30 @@ export default () => {
       clearInterval(id);
       return;
     }
+    let itemId = new Date().getTime() + "";
     chatStore.filterChatItems.push({
       content:
-        "刚才抢到红包啦内容.......,本曲出自黄梅戏《蓝桥汲水》选段：杉木水桶辛郎儿唆 " +
+        "本曲出自黄梅戏《蓝桥汲水》选段：杉木水桶辛郎儿唆" +
         len,
       nickname: "昵称" + len,
-      itemId: new Date().getTime() + "",
+      itemId,
       createdAt: new Date(),
+    });
+    chatStore.autoReplyChatItems[itemId] = chatStore.autoReplyChatItems[itemId] || [];
+    chatStore.autoReplyChatItems[itemId].push({
+      content: "回复内容1",
+      createdAt: new Date(),
+      chatItemId: itemId
+    });
+    chatStore.autoReplyChatItems[itemId].push({
+      content: "回复内容2",
+      createdAt: new Date(),
+      chatItemId: itemId
+    });
+    chatStore.autoReplyChatItems[itemId].push({
+      content: "回复内容3",
+      createdAt: new Date(),
+      chatItemId: itemId
     });
   }, 2000);
 };

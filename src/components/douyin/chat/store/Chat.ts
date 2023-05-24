@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { getFromStorage, getLocalFilterField } from "../../composable/useStorage";
 import { getAtNickname, parseLocalFilterField } from "../composable/useChatUtil";
 import { sendReply } from "../composable/useTextareaPlugin";
-import { autoReplyContentList, ChatRoomItem, filterFieldKey, originalContentReplyValue, replyTagKey, storageSeparator } from "../constant";
+import { AutoReplyChatItem, autoReplyContentList, ChatRoomItem, filterFieldKey, originalContentReplyValue, replyTagKey, storageSeparator } from "../constant";
 
 export const useChatStore = defineStore("dyChatStore", () => {
 
@@ -16,6 +16,10 @@ export const useChatStore = defineStore("dyChatStore", () => {
   const lastVisitDyChatTime = ref<number>(new Date().getTime());
 
   const filterChatItems = ref<ChatRoomItem[]>([]);
+
+  const autoReplyChatItems = ref<{
+    [itemId: string]: AutoReplyChatItem[]
+  }>({});
 
   /**
    * 未读信息第一个下标
@@ -50,20 +54,40 @@ export const useChatStore = defineStore("dyChatStore", () => {
     return item.createdAt.getTime() <= lastVisitDyChatTime.value;
   }
 
+  function addAutoReplyChatItems(item: ChatRoomItem, replyContent: string) {
+
+    autoReplyChatItems.value[item.itemId] = autoReplyChatItems.value[item.itemId] || [];
+    autoReplyChatItems.value[item.itemId].push({
+      chatItemId: item.itemId,
+      content: replyContent,
+      createdAt: new Date
+    });
+  }
+
   function autoReply(item: ChatRoomItem) {
     let replyContent = getAutoReplyContent(item.content);
     if (isAutoReply.value && replyContent) {
+
       sendReply(getAtNickname(item.nickname) + replyContent);
+
+      addAutoReplyChatItems(item, replyContent);
     }
   }
 
-  function getAutoReplyContent(content: string): String {
+  function getAutoReplyContent(content: string): string {
     let result = "";
     for (let i = 0; i < autoReplyContentList.length; i++) {
       let item = autoReplyContentList[i];
 
       let m = content.match(new RegExp(item.key));
       if (m) {
+
+        //如果有排除项，直接break，不自动回复
+        let filter = item.excludes?.filter(item => m?.input?.includes(item));
+        if (filter && filter.length > 0) {
+          break;
+        }
+
         if (item.value === originalContentReplyValue) {
           result = m[0];
         } else {
@@ -108,6 +132,7 @@ export const useChatStore = defineStore("dyChatStore", () => {
     saveFilterFieldList,
     replyList,
     isAutoReply,
+    autoReplyChatItems,
     getAutoReplyContent,
     saveReplyList: saveToStorage
   };

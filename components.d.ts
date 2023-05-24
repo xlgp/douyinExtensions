@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
     Changduan: typeof import('./src/components/douyin/zimu/changduan/index.vue')['default']
     ChangDuanItem: typeof import('./src/components/douyin/zimu/changduan/ChangDuanItem.vue')['default']
     Douyin: typeof import('./src/components/douyin/index.vue')['default']
+    DyAutoReplyList: typeof import('./src/components/douyin/chat/DyAutoReplyList.vue')['default']
     DyChat: typeof import('./src/components/douyin/chat/DyChat.vue')['default']
     DyChatDropdown: typeof import('./src/components/douyin/chat/DyChatDropdown.vue')['default']
     DyChatItem: typeof import('./src/components/douyin/chat/DyChatItem.vue')['default']
