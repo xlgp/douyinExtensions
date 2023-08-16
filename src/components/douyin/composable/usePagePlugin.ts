@@ -54,10 +54,8 @@ export default () => {
      * 切换直播画面的显示与隐藏
      */
     function toggleLivingPlayer() {
-        let videoElem = document.getElementsByTagName(
-            "video"
-        )[0] as HTMLVideoElement;
         let playerElem = document.getElementsByClassName("living_player")[0] as HTMLElement;
+        let videoElem = playerElem.querySelector("video") as HTMLVideoElement;
         playerElem.addEventListener("dblclick", () => {
             toggleDom(videoElem, videoElem.style.display == "none");
         });
