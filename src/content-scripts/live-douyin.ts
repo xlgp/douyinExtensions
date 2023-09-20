@@ -14,21 +14,16 @@ window.addEventListener('load', () => {
     app = createDyExVueApp();
   }
 
-  console.log("loading");
   useMutationObserver()
     .catch(err => {
       console.error(err);
       return p2;
-    }).then(node=>{
-        console.log(node);
-        createVueApp();
-    })
-    .finally(() => console.log("finally"));
+    }).then(createVueApp);
 
   let p2 = new Promise((resolve, reject) => {
     let millis = 10000;
     setTimeout(() => {
-      console.log(`5s 后执行`);
+      console.log(`10s 后执行`);
       resolve(millis);
     }, millis)
   });
