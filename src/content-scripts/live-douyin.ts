@@ -14,22 +14,27 @@ window.addEventListener('load', () => {
     app = createDyExVueApp();
   }
 
-  let p1 = useMutationObserver.catch(err => {
-    console.error(err);
-    return p2;
-  });
+  console.log("loading");
+  useMutationObserver()
+    .catch(err => {
+      console.error(err);
+      return p2;
+    }).then(node=>{
+        console.log(node);
+        createVueApp();
+    })
+    .finally(() => console.log("finally"));
 
   let p2 = new Promise((resolve, reject) => {
-    console.log(`5s 后执行`);
+    let millis = 10000;
     setTimeout(() => {
-      resolve(5000);
-    }, 5000)
+      console.log(`5s 后执行`);
+      resolve(millis);
+    }, millis)
   });
 
   //先监听聊天区dom创建，再创建vue。
   //若监听失败，5s后执行创建操作。
-  Promise.race([p1, p2])
-    .then(createVueApp)
-    .catch(console.error);
+
 
 });
