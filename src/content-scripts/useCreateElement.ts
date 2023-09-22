@@ -9,13 +9,6 @@ function getDySideBar() {
   return document.getElementById("douyin-sidebar");
 }
 
-let style: Style = {
-  position: "fixed",
-  bottom: "25%",
-  right: "2px",
-  "z-index": zIndex,
-};
-
 function createElement(id: string) {
   let mountEl = document.getElementById(id);
   if (mountEl) {
@@ -30,6 +23,19 @@ function createElement(id: string) {
 function createDyExtElement() {
   const MOUNT_EL_ID = "dy-ext-box";
   let mountEl = createElement(MOUNT_EL_ID);
+  let sidebarElem = getDySideBar();
+
+  let style: Style = {
+    position: "fixed",
+    bottom: "20%",
+    right: "2px",
+    "z-index": zIndex,
+  };
+
+  if (sidebarElem) {
+    let rect = sidebarElem.getBoundingClientRect();
+    style.bottom = (document.body.clientHeight - rect.y + 10) + "px";
+  }
   setElemStyle(mountEl, style);
   document.body.appendChild(mountEl);
   return mountEl;
