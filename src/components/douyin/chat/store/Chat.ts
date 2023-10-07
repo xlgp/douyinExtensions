@@ -1,14 +1,18 @@
 import { defineStore } from "pinia";
 import { getFromStorage, getLocalFilterField } from "../../composable/useStorage";
-import { getAtNickname, parseLocalFilterField } from "../composable/useChatUtil";
-import { sendReply } from "../composable/useTextareaPlugin";
+import { getAtNickname, getAutoReplyContent, parseLocalFilterField } from "../composable/useChatUtil";
+import useTextareaPlugin from "../composable/useTextareaPlugin";
 import { AutoReplyChatItem, autoReplyContentList, ChatRoomItem, filterFieldKey, originalContentReplyValue, replyTagKey, storageSeparator } from "../constant";
 
 export const useChatStore = defineStore("dyChatStore", () => {
 
   const filterFieldList = ref(parseLocalFilterField(getLocalFilterField()));
 
-  const isAutoReply = ref(true);
+  const isAutoReply = ref<Boolean>(true);
+
+  const isTextAreaFocus = ref<Boolean>(false);
+
+  const { sendReply } = useTextareaPlugin(e => isTextAreaFocus.value = true, e => isTextAreaFocus.value = false);
 
   /**
    * 最新一次查看面板的时间
@@ -16,6 +20,9 @@ export const useChatStore = defineStore("dyChatStore", () => {
   const lastVisitDyChatTime = ref<number>(new Date().getTime());
 
   const filterChatItems = ref<ChatRoomItem[]>([]);
+
+  //准备回复队列
+  const pendingReplyItemIds = ref<number[]>([]);
 
   const autoReplyChatItems = ref<{
     [itemId: string]: AutoReplyChatItem[]
@@ -32,10 +39,29 @@ export const useChatStore = defineStore("dyChatStore", () => {
 
   const replyList = ref(getFromStorage() || []);
 
+
+  let autoReplyInterval: any;
+  watch(isTextAreaFocus, focus => {
+    clearInterval(autoReplyInterval);
+    if (focus) {
+      return;
+    }
+
+    autoReplyInterval = setInterval(() => {
+      if (pendingReplyItemIds.value.length == 0) {
+        clearInterval(autoReplyInterval);
+      }
+      autoReply();
+    }, 1000);
+  });
+
   function setFilterChatItems(item: ChatRoomItem) {
     filterChatItems.value.push(item);
+    pendingReplyItemIds.value.push(filterChatItems.value.length - 1);
     //自动回复
-    autoReply(item);
+    if (isAutoReply.value) {
+      autoReply();
+    }
   }
 
   function clearFilterChatItems() {
@@ -64,40 +90,23 @@ export const useChatStore = defineStore("dyChatStore", () => {
     });
   }
 
-  function autoReply(item: ChatRoomItem) {
-    let replyContent = getAutoReplyContent(item.content);
-    if (isAutoReply.value && replyContent) {
+  function autoReply() {
 
-      sendReply(getAtNickname(item.nickname) + replyContent);
-
-      addAutoReplyChatItems(item, replyContent);
+    if (isTextAreaFocus.value) {
+      return;
     }
-  }
+    let index = pendingReplyItemIds.value.shift();
+    if (Number.isInteger(index)) {
+      let item: ChatRoomItem = filterChatItems.value[index as number];
+      let replyContent = getAutoReplyContent(item.content, autoReplyContentList, originalContentReplyValue);
 
-  function getAutoReplyContent(content: string): string {
-    let result = "";
-    for (let i = 0; i < autoReplyContentList.length; i++) {
-      let item = autoReplyContentList[i];
+      if (replyContent) {
 
-      let m = content.match(new RegExp(item.key));
-      if (m) {
+        sendReply(getAtNickname(item.nickname) + replyContent);
 
-        //如果有排除项，直接break，不自动回复
-        let filter = item.excludes?.filter(item => m?.input?.includes(item));
-        if (filter && filter.length > 0) {
-          break;
-        }
-
-        if (item.value === originalContentReplyValue) {
-          result = m[0];
-        } else {
-          result = item.value;
-        }
-        break;
+        addAutoReplyChatItems(item, replyContent);
       }
     }
-
-    return result;
   }
 
   const unreadChatItemCount = computed(() => {
@@ -126,14 +135,13 @@ export const useChatStore = defineStore("dyChatStore", () => {
     lastVisitDyChatTime,
     unreadChatItemCount,
     lastUnReadDyChatIndex,
+    replyList,
+    isAutoReply,
+    autoReplyChatItems,
     setLastVisitDyChatTime,
     setFilterChatItems,
     clearFilterChatItems,
     saveFilterFieldList,
-    replyList,
-    isAutoReply,
-    autoReplyChatItems,
-    getAutoReplyContent,
     saveReplyList: saveToStorage
   };
 });

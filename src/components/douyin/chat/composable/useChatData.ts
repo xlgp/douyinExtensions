@@ -1,6 +1,17 @@
 import { useChatStore } from "../store/Chat";
 
-const size = 4;
+const size = 40;
+
+let nicknameList = ["好啊", "僻", "心灵", "阿斯顿", "微软", "哦i", "那边", "模块", "阿三", "风格化"];
+
+let info = {
+  [nicknameList[1]]: nicknameList[1] + " 谢谢",
+  [nicknameList[2]]: nicknameList[2] + " 辛苦",
+};
+
+function getNickNameIndex() {
+  return Math.floor(Math.random() * nicknameList.length);
+}
 
 export default () => {
   let chatStore = useChatStore();
@@ -11,29 +22,13 @@ export default () => {
       return;
     }
     let itemId = new Date().getTime() + "";
-    chatStore.filterChatItems.push({
-      content:
-        "本曲出自黄梅戏《蓝桥汲水》选段：杉木水桶辛郎儿唆" +
-        len,
-      nickname: "昵称" + len,
+    let nickname = nicknameList[getNickNameIndex()];
+    let item = {
+      content: info[nickname] || "本曲出自黄梅戏《蓝桥汲水》选段：杉木水桶辛郎儿唆" + len,
+      nickname,
       itemId,
       createdAt: new Date(),
-    });
-    chatStore.autoReplyChatItems[itemId] = chatStore.autoReplyChatItems[itemId] || [];
-    chatStore.autoReplyChatItems[itemId].push({
-      content: "回复内容1",
-      createdAt: new Date(),
-      chatItemId: itemId
-    });
-    chatStore.autoReplyChatItems[itemId].push({
-      content: "回复内容2",
-      createdAt: new Date(),
-      chatItemId: itemId
-    });
-    chatStore.autoReplyChatItems[itemId].push({
-      content: "回复内容3",
-      createdAt: new Date(),
-      chatItemId: itemId
-    });
-  }, 2000);
+    };
+    chatStore.setFilterChatItems(item);
+  }, 100);
 };

@@ -16,8 +16,10 @@
 <script lang="ts" setup>
 import { formatDate } from "../../../utils";
 import { getAtNickname, insertNicknameToTextAreaElem } from "./composable/useChatUtil";
-import { sendReply } from "./composable/useTextareaPlugin";
+import useTextareaPlugin from "./composable/useTextareaPlugin";
 import { chatProvideKey, ChatProvideType } from "./constant";
+
+const { sendReply } = useTextareaPlugin();
 
 const { close } = inject<ChatProvideType>(chatProvideKey, {} as ChatProvideType);
 

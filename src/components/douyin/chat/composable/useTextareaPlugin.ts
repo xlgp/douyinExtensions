@@ -1,49 +1,73 @@
 import useAutoInput, { AutoInputType } from "../../composable/useAutoInput";
 
-function getElem() {
-  return document.getElementsByClassName(
-    "webcast-chatroom___textarea"
-  )[0] as HTMLTextAreaElement;
-}
+export default (focusCallback: ((e: FocusEvent) => void) | undefined, blurCallback: ((e: FocusEvent) => void) | undefined) => {
 
-function getBtnElem() {
-  return document.getElementsByClassName(
-    "webcast-chatroom___send-btn"
-  )[0] as HTMLButtonElement;
-}
+  function getTextAreaElem() {
+    let dom = document.getElementsByClassName(
+      "webcast-chatroom___textarea"
+    )[0] as HTMLTextAreaElement;
 
-let textAreaElem: HTMLTextAreaElement;
-let btnElem: HTMLButtonElement;
-let autoInput: AutoInputType;
+    if (dom) {
+      if (focusCallback && blurCallback) {
+        dom.addEventListener("focus", focusCallback);
+        dom.addEventListener("blur", blurCallback);
+      }
+    }
 
-export default {};
-
-export function insertToTextAreaElem(text: string, focus: boolean = false) {
-  if (!textAreaElem) {
-    textAreaElem = getElem();
-    autoInput = useAutoInput(textAreaElem);
+    return dom;
   }
 
-  if (text && textAreaElem) {
-    autoInput.fireInput(text);
-    if (focus) {
-      setTimeout(() => {
-        textAreaElem.focus();
-      }, 200);
+  function getBtnElem() {
+    return document.getElementsByClassName(
+      "webcast-chatroom___send-btn"
+    )[0] as HTMLButtonElement;
+  }
+
+  let textAreaElem: HTMLTextAreaElement = getTextAreaElem();
+  let btnElem: HTMLButtonElement;
+  let autoInput: AutoInputType = useAutoInput(textAreaElem);
+
+  function fireInput(text: string) {
+    if (!text) {
+      return;
+    }
+    if (!textAreaElem) {
+      textAreaElem = getTextAreaElem();
+      autoInput = useAutoInput(textAreaElem);
+    }
+
+    if (textAreaElem) {
+      autoInput.fireInput(text);
+      return true;
+    }
+    return false;
+  }
+
+  function insertToTextAreaElem(text: string, focus: boolean = false) {
+    if (fireInput(text)) {
+      if (focus) {
+        setTimeout(() => {
+          textAreaElem.focus();
+        }, 200);
+      }
     }
   }
-}
 
-export function sendReply(text: string) {
-  if (!textAreaElem) {
-    textAreaElem = getElem();
-    autoInput = useAutoInput(textAreaElem);
+  function sendReply(text: string) {
+    if (!fireInput(text)) {
+      return;
+    }
+    if (!btnElem) {
+      btnElem = getBtnElem();
+    }
+    btnElem.click();
+    console.log(textAreaElem.value);
+    textAreaElem.value = "";
   }
-  if (text && textAreaElem) {
-    autoInput.fireInput(text);
+
+  return {
+    sendReply,
+    insertToTextAreaElem
   }
-  if (!btnElem) {
-    btnElem = getBtnElem();
-  }
-  btnElem.click();
+
 }

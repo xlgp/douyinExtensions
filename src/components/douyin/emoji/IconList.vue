@@ -1,10 +1,15 @@
 <template>
   <div class="box">
-    <Icon v-for="icon in icons" :text="icon.icon" :key="icon.text" @click="handleClick(icon)" />
+    <Icon
+      v-for="icon in icons"
+      :text="icon.icon"
+      :key="icon.text"
+      @click="handleClick(icon)"
+    />
   </div>
 </template>
 <script setup lang="ts">
-import { insertToTextAreaElem } from '../chat/composable/useTextareaPlugin';
+import useTextareaPlugin from '../chat/composable/useTextareaPlugin';
 import { EmojiType } from './data';
 
 defineProps({
@@ -14,6 +19,8 @@ defineProps({
     default: [] as EmojiType[],
   }
 });
+
+const {insertToTextAreaElem} = useTextareaPlugin();
 
 const handleClick = (icon: EmojiType) => {
   insertToTextAreaElem("[" + icon.text + "]", true);

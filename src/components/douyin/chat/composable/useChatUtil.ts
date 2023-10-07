@@ -1,4 +1,4 @@
-import { storageSeparator } from "../constant";
+import { storageSeparator, AutoReplyContentType } from "../constant";
 
 //过滤
 let filterClassList = [
@@ -80,4 +80,30 @@ export function parseLocalFilterField(value: string) {
     .map<string>((value: string): string => {
       return value.trim();
     });
+}
+
+export function getAutoReplyContent(content: string, autoReplyContentList: AutoReplyContentType[], originalContentReplyValue: string): string {
+  let result = "";
+  for (let i = 0; i < autoReplyContentList.length; i++) {
+    let item = autoReplyContentList[i];
+
+    let m = content.match(new RegExp(item.key));
+    if (m) {
+
+      //如果有排除项，直接break，不自动回复
+      let filter = item.excludes?.filter(item => m?.input?.includes(item));
+      if (filter && filter.length > 0) {
+        break;
+      }
+
+      if (item.value === originalContentReplyValue) {
+        result = m[0];
+      } else {
+        result = item.value;
+      }
+      break;
+    }
+  }
+
+  return result;
 }
