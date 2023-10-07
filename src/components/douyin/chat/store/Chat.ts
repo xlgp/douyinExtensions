@@ -8,11 +8,11 @@ export const useChatStore = defineStore("dyChatStore", () => {
 
   const filterFieldList = ref(parseLocalFilterField(getLocalFilterField()));
 
-  const isAutoReply = ref<Boolean>(true);
+  const isAutoReply = ref(true);
 
-  const isTextAreaFocus = ref<Boolean>(false);
+  const isTextAreaFocus = ref(false);
 
-  const { sendReply } = useTextareaPlugin(e => isTextAreaFocus.value = true, e => isTextAreaFocus.value = false);
+  const { sendReply } = useTextareaPlugin((e, focus) => isTextAreaFocus.value = focus);
 
   /**
    * 最新一次查看面板的时间

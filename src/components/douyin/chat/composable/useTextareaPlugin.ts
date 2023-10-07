@@ -1,6 +1,6 @@
 import useAutoInput, { AutoInputType } from "../../composable/useAutoInput";
 
-export default (focusCallback: ((e: FocusEvent) => void) | undefined, blurCallback: ((e: FocusEvent) => void) | undefined) => {
+export default (focusCallback: ((e: FocusEvent, focus: boolean) => void) | undefined = undefined) => {
 
   function getTextAreaElem() {
     let dom = document.getElementsByClassName(
@@ -8,9 +8,9 @@ export default (focusCallback: ((e: FocusEvent) => void) | undefined, blurCallba
     )[0] as HTMLTextAreaElement;
 
     if (dom) {
-      if (focusCallback && blurCallback) {
-        dom.addEventListener("focus", focusCallback);
-        dom.addEventListener("blur", blurCallback);
+      if (focusCallback) {
+        dom.addEventListener("focus", e => focusCallback(e, true));
+        dom.addEventListener("blur", e => focusCallback(e, false));
       }
     }
 
