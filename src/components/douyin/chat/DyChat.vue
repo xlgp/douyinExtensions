@@ -1,18 +1,32 @@
 <template>
-  <el-popover popper-class="dy-el-popover" placement="left-end" effect="dark" :show-arrow="false" :offset="5"
-    :visible="visible" :width="chatOptions.width" :hide-after="100" :persistent="false">
+  <el-popover
+    popper-class="dy-el-popover"
+    placement="left-end"
+    effect="dark"
+    :show-arrow="false"
+    :offset="5"
+    :visible="visible"
+    :width="chatOptions.width"
+    :hide-after="100"
+    :persistent="false"
+  >
     <template #reference>
       <el-badge :value="chatStore.unreadChatItemCount" :hidden="badgeHidden">
         <icon-chat @click="handleClick" />
       </el-badge>
     </template>
-    <el-tabs v-model="activeName" style="height:390px; padding: 10px;">
-      <el-tab-pane :label="tabPaneList[0].label" :name="tabPaneList[0].name"><dy-chat-list /></el-tab-pane>
-      <el-tab-pane :label="tabPaneList[1].label" :name="tabPaneList[1].name"><dy-config /></el-tab-pane>
+    <el-tabs v-model="activeName" class="chat-tab">
+      <el-tab-pane v-for="item in tabPaneList" :label="item.label" :name="item.name">
+        <component :is="item.component"></component>
+      </el-tab-pane>
     </el-tabs>
   </el-popover>
 </template>
 <script setup lang="ts">
+import DyChatList from "./DyChatList.vue";
+import DyConfig from "./DyConfig.vue";
+import DyAutoReplyContent from "./DyAutoReplyContent.vue";
+
 import usechatOptions from "./composable/usedychatOptions";
 import { chatProvideKey, ChatProvideType } from "./constant";
 import useDonyinPlugin from "./composable/useDouyinPlugin";
@@ -26,7 +40,15 @@ useChatStyle();
 
 const visible = ref(false);
 
-const tabPaneList = reactive([{ label: "列表", name: "list" }, { label: "设置", name: "config" }]);
+const tabPaneList = reactive([
+  { label: "列表", name: "list", component: markRaw(DyChatList) },
+  { label: "过滤", name: "filterConfig", component: markRaw(DyConfig) },
+  {
+    label: "回复",
+    name: "autoReplyConfig",
+    component: markRaw(DyAutoReplyContent),
+  },
+]);
 const activeName = ref(tabPaneList[0].name);
 
 const badgeHidden = computed(() => {
@@ -54,6 +76,10 @@ provide<ChatProvideType>(chatProvideKey, { close });
   top: 0;
   right: initial;
   transform: translateY(-30%) translateX(-50%);
+}
+.chat-tab {
+  height: 390px;
+  padding: 10px;
 }
 </style>
 <style>

@@ -1,7 +1,4 @@
 <template>
-  <el-form-item label="自动回复">
-    <el-switch v-model="isAutoReply" inline-prompt active-text="是" inactive-text="否" style="--el-switch-off-color: #ff4949"/>
-  </el-form-item>
   <el-form-item label="快捷回复">
     <el-input
       v-model="inputValue"
@@ -32,7 +29,7 @@ import { Plus } from "@element-plus/icons-vue";
 import { useChatStore } from "./store/Chat";
 
 const store = useChatStore();
-const { replyList, isAutoReply } = storeToRefs(store);
+const { replyList } = storeToRefs(store);
 const inputValue = ref("");
 
 const handleClose = (tag: string) => {
